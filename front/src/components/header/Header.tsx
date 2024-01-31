@@ -1,5 +1,5 @@
 import "./Header.scss";
-import logo from "../../../public/logo.png";
+import logo from "../../assets/images/logo.png";
 import {useState} from "react";
 function Header(){
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
