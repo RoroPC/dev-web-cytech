@@ -1,5 +1,5 @@
 # Partie front du projet  
-## Version de développement
+## Installation et configuration
 Le projet nécéssite node 20.11.0 : https://nodejs.org/en  
 ```bash
 npm install 
