@@ -4,3 +4,9 @@
    margin: 0;
    min-height: 100vh;
  }
+a{
+  transition: color 0.15s ease;
+}
+ a:hover{
+    color: $dark-orange;
+ }
