@@ -9,6 +9,7 @@ main{
   flex-direction: column;
   gap: 10vh;
   padding-bottom: 15vh;
+  align-items: center;
 }
 
 article{
@@ -68,7 +69,7 @@ article>h3{
   color: white;
   font-weight: lighter;
   background-color: $dark-orange;
-  box-shadow:0px 0px 0rem #365736 ;
+  box-shadow:0 0 0 #365736 ;
 }
 
 .flower-images{
@@ -77,6 +78,13 @@ article>h3{
 
 #fleur-1,#fleur-2{
   display: none;
+}
+
+.article-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+  width: 80%;
 }
 @media screen and (min-width:1180px) {
 
@@ -116,5 +124,19 @@ article>h3{
   .call-button:hover{
     color: white;
     box-shadow:0px 4px 0.15rem #365736 ;
+  }
+
+  article{
+    width: 25%;
+  }
+
+  article>p{
+    font-size: medium;
+  }
+  article:nth-child(odd){
+    align-self: flex-start;
+  }
+  article:nth-child(even){
+    align-self: flex-end;
   }
 }
