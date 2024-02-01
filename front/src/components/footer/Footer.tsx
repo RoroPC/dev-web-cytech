@@ -11,7 +11,7 @@ function Footer(){
                 <li><a>Contact</a></li>
             </ul>
             <p>Développé par Robin Simonneau, Rujdy Hasni, Bilel Taieb.</p>
-            <p>Florisimo © 2024</p>
+            <p>Fleurtissimo © 2024</p>
 
         </footer>
     )
