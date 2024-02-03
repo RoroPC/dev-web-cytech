@@ -86,8 +86,24 @@ article>h3{
   gap: 10vh;
   width: 80%;
 }
-@media screen and (min-width:1180px) {
 
+.article-with-image>img{
+  display: none;
+}
+@media screen and (min-width:1180px) {
+  .article-with-image>img{
+    display: block;
+    height: 200px;
+    border: white 10px solid;
+    border-radius: 40px;
+  }
+  .article-with-image{
+    display: flex;
+    justify-content: space-between;
+  }
+  .article-with-image>div{
+    width: 30%;
+  }
   .flower-images{
     display: block;
   }
@@ -127,9 +143,12 @@ article>h3{
   }
 
   article{
-    width: 25%;
+    width: 35%;
   }
 
+  .article-2{
+    width: 100%;
+  }
   article>p{
     font-size: medium;
   }

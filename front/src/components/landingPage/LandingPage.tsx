@@ -1,7 +1,7 @@
 import "./LandingPage.scss"
 import fleur1 from "../../assets/images/fleur.png";
 import fleur2 from "../../assets/images/fleur2.png";
-
+import fleurTest from '../../assets/images/fleurtest.png';
 function LandingPage(){
     return(
         <main>
@@ -26,20 +26,27 @@ function LandingPage(){
                         Explorez notre sélection soigneusement composée et laissez la beauté naturelle égayer votre vie
                     </p>
                 </article>
-                <article>
-                    <h2>Nos Collections</h2>
-                    <h3>Fleurs pour toutes occasions</h3>
-                    <p>Que ce soit pour un anniversaire, un mariage, une naissance ou simplement pour exprimer votre
-                        amour,
-                        nos collections de fleurs sont conçues pour capturer l'essence de chaque moment spécial.
-                    </p>
-                    <h3>Fleurs fraîches de qualité</h3>
-                    <p>
-                        Nous nous engageons à vous offrir des fleurs fraîches et de la plus haute qualité. Chaque
-                        bouquet
-                        est préparé avec soin par nos experts floraux pour garantir une expérience florale
-                        exceptionnelle.
-                    </p>
+                <article className="article-2">
+                    <div className="article-with-image">
+                        <img src={fleurTest} alt="fleur"/>
+                        <div>
+                            <h2>Nos Collections</h2>
+                            <h3>Fleurs pour toutes occasions</h3>
+                            <p>Que ce soit pour un anniversaire, un mariage, une naissance ou simplement pour exprimer
+                                votre
+                                amour,
+                                nos collections de fleurs sont conçues pour capturer l'essence de chaque moment spécial.
+                            </p>
+                            <h3>Fleurs fraîches de qualité</h3>
+                            <p>
+                                Nous nous engageons à vous offrir des fleurs fraîches et de la plus haute qualité.
+                                Chaque
+                                bouquet
+                                est préparé avec soin par nos experts floraux pour garantir une expérience florale
+                                exceptionnelle.
+                            </p>
+                        </div>
+                    </div>
                 </article>
                 <article>
                     <h2>Pourquoi choisir Fleurtissimo?</h2>
