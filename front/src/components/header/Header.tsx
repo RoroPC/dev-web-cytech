@@ -27,11 +27,11 @@ function Header(){
               </span>
             </button>
             <ul className={`${isMobileMenuOpen ? 'open-menu' : 'close-menu'}`}>
-            <li><a>Accueil</a></li>
-                <li><a>Bulbes</a></li>
-                <li><a>Rosiers</a></li>
-                <li><a>Plantes à massif</a></li>
-                <li><a>Contact</a></li>
+                <li><Link to="/">Accueil</Link></li>
+                <li><Link to="/bulbes">Bulbes</Link></li>
+                <li><Link to="/rosiers">Rosiers</Link></li>
+                <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
+                <li><Link to="/contact">Contact</Link></li>
             </ul>
         </header>
     )
