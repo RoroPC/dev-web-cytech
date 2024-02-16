@@ -3,7 +3,7 @@ name: Push React Image To Azure Container Registery
 on:
   push:
     branches:
-      - dev-front
+      - main
 permissions:
   id-token: write
   contents: read
