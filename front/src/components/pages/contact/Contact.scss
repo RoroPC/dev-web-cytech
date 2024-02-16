@@ -55,5 +55,29 @@ input:focus-visible,select:focus-visible, textarea:focus-visible{
 }
 
 @media screen and (min-width:1180px){
-
+  .contact__form{
+    display: flex;
+    gap: 2vw;
+  }
+  .contact__img{
+    display: block;
+    width: 40%;
+  }
+  .contact__form>form{
+    width: 50%;
+    background-color: $light-orange;
+    padding: 3vh;
+    border-radius: $border-radius;
+  }
+  .contact__input{
+    flex-direction: column;
+    gap: 1vh;
+    height: 20%;
+  }
+  .contact__input>input,  .contact__input>select,  .contact__input>textarea{
+    width: 80%;
+  }
+  .contact__submit__btn{
+    width: 50%;
+  }
 }
