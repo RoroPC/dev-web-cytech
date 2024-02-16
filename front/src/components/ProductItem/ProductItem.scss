@@ -1,0 +1,35 @@
+@import "src/assets/variables";
+
+
+.product-item{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+}
+
+.product-item__info{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2vh;
+
+}
+
+.product-item__info__price{
+  border-radius: $border-radius;
+  background-color: $dark-orange;
+  color: white;
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+
+}
+
+.product-item__image>img{
+  border-radius: $border-radius;
+  width: 150px;
+  height: 150px;
+}
+
