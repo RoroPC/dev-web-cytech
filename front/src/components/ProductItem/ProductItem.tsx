@@ -1,24 +1,35 @@
 
-import "./ProductItem.css";
-
-function ProductItem() {
+import "./ProductItem.scss";
+import ProductItemType from  "./ProductItemType.ts"
+import PropTypes from "prop-types";
+function ProductItem({refer, title, desc, img, price}:ProductItemType) {
     return (
-        <div className="product-item">
+        <div className="product-item" id={refer}>
         <div className="product-item__image">
-            <img src="https://via.placeholder.com/150" alt="product" />
+            <img src={ img } alt="product" />
         </div>
         <div className="product-item__info">
-            <div className="product-item__info__title">Product Title</div>
+            <div className="product-item__info__title">{title}</div>
             <div className="product-item__info__description">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Quisquam
-            voluptas, voluptatum, quibusdam, quia quos quae voluptate
-            exercitationem voluptatum quod asperiores quas. Quo, quae. Quisquam
-            voluptas, voluptatum, quibusdam, quia quos quae voluptate
-            exercitationem voluptatum quod asperiores quas. Quo, quae.
+                {desc}
             </div>
-            <div className="product-item__info__price">R$ 100,00</div>
+            <div className="product-item__info__price">{price} $</div>
         </div>
         </div>
     );
+}
+
+ProductItem.propTypes = {
+    refer: PropTypes.string.isRequired,
+    title: PropTypes.string.isRequired,
+    desc: PropTypes.string,
+    img: PropTypes.string.isRequired,
+    price: PropTypes.number.isRequired
+}
+
+ProductItem.defaultProps = {
+    title: "Product Title",
+    img: "https://placehold.co/400",
+    price: 50
 }
 export default ProductItem;
