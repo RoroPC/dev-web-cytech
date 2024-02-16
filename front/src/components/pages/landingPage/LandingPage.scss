@@ -1,0 +1,161 @@
+@import "src/assets/variables";
+
+main{
+  flex:1;
+  width: 100%;
+  background-color: $beige;
+  font-family: 'Poppins', sans-serif;
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+  padding-bottom: 15vh;
+  align-items: center;
+}
+
+article{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-self: flex-start;
+  width: 100%;
+}
+
+article>h2{
+  font-size: xx-large;
+  font-weight: 500;
+}
+
+article>p{
+  font-size: smaller;
+}
+
+article>h3{
+  font-size: x-large;
+  font-weight: 300;
+}
+
+
+.title{
+  color: white;
+  background-color: $green;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  min-height: 40vh;
+  width: 100%;
+}
+.title>div{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.title>div>p{
+  font-size: large;
+}
+
+.title>div>h1{
+    font-weight: bold;
+  font-size: xxx-large;
+  margin-bottom: 0;
+}
+
+.call-button{
+  justify-self: center;
+  padding: 1rem 1rem ;
+  border-radius: $border-radius;
+  color: white;
+  font-weight: lighter;
+  background-color: $dark-orange;
+  box-shadow:0 0 0 #365736 ;
+}
+
+.flower-images{
+  display: none;
+}
+
+#fleur-1,#fleur-2{
+  display: none;
+}
+
+.article-list{
+  display: flex;
+  flex-direction: column;
+  gap: 10vh;
+  width: 80%;
+}
+
+.article-with-image>img{
+  display: none;
+}
+@media screen and (min-width:1180px) {
+  .article-with-image>img{
+    display: block;
+    height: 200px;
+    border: white 10px solid;
+    border-radius: 40px;
+  }
+  .article-with-image{
+    display: flex;
+    justify-content: space-between;
+  }
+  .article-with-image>div{
+    width: 30%;
+  }
+  .flower-images{
+    display: block;
+  }
+  #fleur-1{
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 4vh;
+    z-index: 1;
+  }
+  #fleur-2{
+    display: block;
+    position: absolute;
+    right: 0;
+    top: 30vh;
+    z-index: 1;
+  }
+  .title{
+    z-index: 0;
+    min-height: 60vh;
+  }
+  .title>div>p{
+    font-size: large;
+  }
+  .title>div>p{
+    font-size: x-large;
+  }
+  .call-button{
+    transition: box-shadow 0.3s ease;
+    padding: 1rem 4rem;
+    font-size: x-large;
+    cursor: pointer;
+  }
+  .call-button:hover{
+    color: white;
+    box-shadow:0 4px 0.15rem #365736 ;
+  }
+
+  article{
+    width: 35%;
+  }
+
+  .article-2{
+    width: 100%;
+  }
+  article>p{
+    font-size: medium;
+  }
+  article:nth-child(odd){
+    align-self: flex-start;
+  }
+  article:nth-child(even){
+    align-self: flex-end;
+  }
+}

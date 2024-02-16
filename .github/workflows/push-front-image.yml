@@ -1,0 +1,28 @@
+name: Push React Image To Azure Container Registery
+
+on:
+  push:
+    branches:
+      - main
+permissions:
+  id-token: write
+  contents: read
+jobs:
+  build:
+    name: Build and send image to ACR
+    runs-on: ubuntu-latest
+    steps:
+      - name: 'Checkout GitHub Action'
+        uses: actions/checkout@main
+      - name: 'Login to azure'
+        uses: Azure/login@v1.6.1
+        with:
+          client-id: ${{ secrets.AZURE_CLIENT_ID }}
+          tenant-id: ${{ secrets.AZURE_TENANT_ID }}
+          subscription-id: ${{ secrets.AZURE_SUBSCRIPTIONS_ID }}
+      - name: 'Build docker image and push it'
+        run: |
+          az acr login -n fleurtissimoacr 
+          docker build -t fleurtissimoacr.azurecr.io/front/frontend-react ./front/
+          docker push fleurtissimoacr.azurecr.io/front/frontend-react
+

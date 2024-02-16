@@ -1,0 +1,15 @@
+ @import "src/assets/variables";
+ @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+ body{
+   margin: 0;
+   min-height: 100vh;
+   overflow-x: hidden;
+   max-width: 100%;
+ }
+a{
+  transition: color 0.15s ease;
+  text-decoration: none;
+}
+ a:hover{
+    color: $dark-orange;
+ }
