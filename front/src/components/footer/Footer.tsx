@@ -12,7 +12,7 @@ function Footer(){
                 <li><Link to="/contact">Contact</Link></li>
             </ul>
             <p>Développé par Robin Simonneau, Rujdy Hasni, Bilel Taieb.</p>
-            <p>Fleurtissimo © 2024 v0.0.1</p>
+            <p>Fleurtissimo © 2024 v0.0.2</p>
 
         </footer>
     )
