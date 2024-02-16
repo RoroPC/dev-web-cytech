@@ -1,6 +1,6 @@
 
 import "./ProductItem.scss";
-import ProductItemType from  "./ProductItemType.ts"
+import ProductItemType from "./ProductItemType.ts"
 import PropTypes from "prop-types";
 function ProductItem({refer, title, img, price}:ProductItemType) {
     return (

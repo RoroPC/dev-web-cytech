@@ -1,7 +1,7 @@
 import "./LandingPage.scss"
-import fleur1 from "../../assets/images/fleur.png";
-import fleur2 from "../../assets/images/fleur2.png";
-import fleurTest from '../../assets/images/fleurtest.png';
+import fleur1 from "../../../assets/images/fleur.png";
+import fleur2 from "../../../assets/images/fleur2.png";
+import fleurTest from '../../../assets/images/fleurtest.png';
 function LandingPage(){
     return(
         <main>
