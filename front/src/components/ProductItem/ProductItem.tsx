@@ -5,13 +5,11 @@ import PropTypes from "prop-types";
 function ProductItem({refer, title, img, price}:ProductItemType) {
     return (
         <div className="product-item" id={refer}>
-        <div className="product-item__image">
-            <img src={ img } alt="product" />
-        </div>
-        <div className="product-item__info">
+            <div className="product-item__image">
+                <img src={img} alt="product"/>
+            </div>
             <div className="product-item__info__title">{title}</div>
             <div className="product-item__info__price">{price} $</div>
-        </div>
         </div>
     );
 }
