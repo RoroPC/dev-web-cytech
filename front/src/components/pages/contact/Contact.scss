@@ -20,9 +20,14 @@
   justify-content: space-between;
   width: 100%;
 }
-.contact__input>input, .contact__input>select{
+.contact__input>input, .contact__input>select, .contact__input>textarea{
   border: $green solid 1px;
   border-radius: 3px;
+}
+input:focus-visible,select:focus-visible, textarea:focus-visible{
+  border: $dark-orange solid 2px;
+  outline-offset: 0;
+  outline: $dark-orange;
 }
 .contact__submit__btn{
   justify-self: center;
@@ -32,4 +37,23 @@
   background-color: $dark-orange;
   box-shadow:0 0 0 #365736 ;
   border: none;
+}
+
+@media screen and (min-width:820px){
+  .contact__form>form{
+    width: 70%;
+  }
+  .contact__input{
+    height: 100%;
+  }
+  .contact__input>label{
+    font-size: large;
+  }
+  .contact__input>input{
+    height: 100%;
+  }
+}
+
+@media screen and (min-width:1180px){
+
 }

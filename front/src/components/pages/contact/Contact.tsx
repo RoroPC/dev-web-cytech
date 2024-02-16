@@ -57,7 +57,7 @@ function Contact(){
                     </div>
                     <div className={"contact__input"}>
                         <label htmlFor="content">Contenu</label>
-                        <input name={"content"} type={"text-box"} placeholder={"Tapez ici votre mail"}/>
+                        <textarea name={"content"}  placeholder={"Tapez ici votre mail"}/>
                     </div>
                     <input name={"contact-date"} type={"date"} value={stringDate} hidden readOnly required/>
                     <input className={"contact__submit__btn"} name={"submit"} type={"submit"} value={"Envoyer"}/>
