@@ -8,10 +8,12 @@ import BublesPage from "./pages/bulbesPage/BublesPage.tsx";
 import PlantesAMassif from "./pages/plantesAMassif/PlantesAMassif.tsx";
 import Rosiers from "./pages/rosiers/Rosiers.tsx";
 import Contact from "./pages/contact/Contact.tsx";
+import Provider from "../contexts/user/Provider.tsx";
 
 function App() {
 
   return (
+      <Provider>
       <BrowserRouter>
           <div id="app">
               <Header/>
@@ -26,6 +28,7 @@ function App() {
               <Footer/>
           </div>
       </BrowserRouter>
+      </Provider>
   )
 }
 
