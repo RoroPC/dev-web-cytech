@@ -18,6 +18,7 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
+                <li><a>Connexion</a></li>
             </ul>
             <button className="no-display-on-desktop mobile-menu-button" onClick={toggleMobileMenu}>
                <span className="burger-icon">
@@ -32,6 +33,8 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
+                <li><a>Connexion</a></li>
+
             </ul>
         </header>
     )
