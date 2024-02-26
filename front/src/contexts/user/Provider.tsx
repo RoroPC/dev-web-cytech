@@ -1,18 +1,18 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import UserContext from "./index";
-//import { getMe } from "../../services/api/users";
+import {getMe} from "../../services/api/users.ts";
+
 
 function Provider({ children }:{children:object}) {
     const [userData, setUserData] = useState(undefined);
     const [value, setValue] = useState({ userData });
-    /**
+    //TODO: Update le getMe avec l'api
     useEffect(() => {
         getMe().then((user) => {
             setUserData(user);
         });
     }, []);
-    **/
     useEffect(() => {
         setValue({ userData });
     }, [userData]);
