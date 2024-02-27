@@ -2,7 +2,7 @@
 import "./ProductItem.scss";
 import ProductItemType from "./ProductItemType.ts"
 import PropTypes from "prop-types";
-function ProductItem({refer, title, img, price}:ProductItemType) {
+function ProductItem({refer, title, img, price, stock}:ProductItemType) {
     return (
         <div className="product-item" id={refer}>
             <div className="product-item__image">
@@ -10,6 +10,7 @@ function ProductItem({refer, title, img, price}:ProductItemType) {
             </div>
             <div className="product-item__info__title">{title}</div>
             <div className="product-item__info__price">{price} $</div>
+            <div className="product-item__info__stock">{stock} </div>
         </div>
     );
 }
