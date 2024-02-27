@@ -10,7 +10,7 @@ function ProductItem({refer, title, img, price, stock}:ProductItemType) {
             </div>
             <div className="product-item__info__title">{title}</div>
             <div className="product-item__info__price">{price} $</div>
-            <div className="product-item__info__stock1">{stock} </div>
+            <div className="product-item__info__stock">{stock} </div>
         </div>
     );
 }
