@@ -13,8 +13,10 @@ function ProductItem({refer, title, img, price, stock}:ProductItemType) {
             </div>
             <div className="product-item__info__title">{title}</div>
             <div className="product-item__info__price">{price} $</div>
-            <div className="product-item__info__stock">{stock}</div>
-            <button onClick={()=> setSeeStock(true) }>Stock</button>
+            {seeStock && (
+                <div className="product-item__info__stock--visible">{stock}</div>
+            )}
+            <button onClick={()=> setSeeStock(true)}>Stock</button>
         </div>
     );
 }
@@ -29,6 +31,7 @@ ProductItem.propTypes = {
 ProductItem.defaultProps = {
     title: "Product Title",
     img: "https://placehold.co/400",
-    price: 50
+    price: 50,
+    stock: 20
 }
 export default ProductItem;
