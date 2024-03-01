@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 class Flower(models.Model):
     id = models.AutoField(primary_key=True)
     name = models.CharField(max_length=100)
-    img = models.URLField()  # Supposons que vous stockez une URL d'image
+    img = models.URLField()  
     price = models.IntegerField()
     stock = models.IntegerField()
 
