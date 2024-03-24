@@ -32,9 +32,15 @@ class CategoryListView(APIView):
         return Response(serializer_class.data)
 
 
-class UserDetailView(generics.RetrieveAPIView):
-    queryset = User.objects.all()
-    serializer_class = UserSerializer
+class UserDetailView(APIView):
+    def get(self, request, format=None):
+        data = {
+            "username": request.user.username,
+            "email": request.user.email,
+            "first_name": request.user.first_name,
+            "last_name": request.user.last_name
+        }
+        return Response(data)
 
 
 class BasketDetailView(APIView):
