@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Flower, Basket
+from .models import Flower, Basket, Category
 from django.contrib.auth.models import User
 
 
@@ -19,3 +19,9 @@ class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = ['id', 'email', 'firstName', 'lastName']
+
+
+class CategorySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Category
+        fields = ['id', 'name']
