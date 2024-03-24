@@ -1,0 +1,35 @@
+[
+    {
+        "model": "RestAPI.flower",
+        "pk": 1,
+        "fields": {
+            "category": 1,
+            "name": "Rose",
+            "img":"http://test.com",
+            "price": 10.00,
+            "stock": 50
+        }
+    },
+    {
+        "model": "RestAPI.flower",
+        "pk": 2,
+        "fields": {
+            "category": 2,
+            "name": "Lily",
+            "img":"http://test.com",
+            "price": 8.00,
+            "stock": 30
+        }
+    },
+        {
+        "model": "RestAPI.flower",
+        "pk": 3,
+        "fields": {
+            "category": 1,
+            "name": "Lycolis",
+            "img":"http://test.com",
+            "price": 12.00,
+            "stock": 10
+        }
+    }
+]
