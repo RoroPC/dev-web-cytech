@@ -15,6 +15,7 @@ Le back utilise Django (Rest) :
 Pour installer les dependances :
 ```
 cd back
+python -m venv ./     
 pip install -r requirements.txt
 ```
 

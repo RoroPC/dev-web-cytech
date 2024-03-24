@@ -1,1 +1,5 @@
 /.idea/
+/back/Lib/
+/back/.idea/
+/back/pyvenv.cfg
+/back/Scripts/

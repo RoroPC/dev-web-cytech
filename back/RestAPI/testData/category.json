@@ -1,0 +1,16 @@
+[
+  {
+        "model": "RestAPI.category",
+        "pk": 1,
+        "fields": {
+            "name": "Bulbes"
+        }
+    },
+    {
+        "model": "RestAPI.category",
+        "pk": 2,
+        "fields": {
+            "name": "Roses"
+        }
+    }
+]
