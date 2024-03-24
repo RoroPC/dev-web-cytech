@@ -101,3 +101,25 @@ class BasketDetailView(APIView):
         queryset = Basket.objects.filter(user=current_user)
         serializer_class = BasketSerializer(queryset, many=True)
         return Response(serializer_class.data)
+
+    def post(self, request, format=None):
+        user = request.user
+        flowers_data = request.data.get(
+            'flowers')
+
+        try:
+            basket = Basket.objects.get(user=user)
+            basket.flowers.clear()
+        except Basket.DoesNotExist:
+            basket = Basket.objects.create(user=user)
+
+        for flower_id in flowers_data:
+            try:
+                flower = Flower.objects.get(id=flower_id)
+                basket.flowers.add(flower)
+            except Flower.DoesNotExist:
+                return Response({"error": f"Flower with id {flower_id} does not exist"},
+                                status=status.HTTP_400_BAD_REQUEST)
+
+        serializer = BasketSerializer(basket)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
