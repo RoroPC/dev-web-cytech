@@ -1,5 +1,7 @@
 from rest_framework import serializers
-from .models import Flower, Basket, User
+from .models import Flower, Basket
+from django.contrib.auth.models import User
+
 
 class FlowerSerializer(serializers.ModelSerializer):
     class Meta:

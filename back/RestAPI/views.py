@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .models import Flower, Basket, User
+from .models import Flower, Basket
+from django.contrib.auth.models import User
 from .serializers import FlowerSerializer, BasketSerializer, UserSerializer
 
 class FlowerListView(generics.ListAPIView):
