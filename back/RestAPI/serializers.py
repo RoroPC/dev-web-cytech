@@ -8,10 +8,12 @@ class FlowerSerializer(serializers.ModelSerializer):
         model = Flower
         fields = ['id', 'name', 'img', 'price', 'stock']
 
+
 class BasketSerializer(serializers.ModelSerializer):
     class Meta:
         model = Basket
         fields = ['id', 'user', 'flowers']
+
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
