@@ -1,3 +1,4 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 from rest_framework import generics
 
@@ -36,6 +37,9 @@ class UserDetailView(generics.RetrieveAPIView):
     serializer_class = UserSerializer
 
 
-class BasketDetailView(generics.RetrieveUpdateAPIView):
-    queryset = Basket.objects.all()
-    serializer_class = BasketSerializer
+class BasketDetailView(APIView):
+    def get(self, request, format=None):
+        current_user = request.user.id
+        queryset = Basket.objects.filter(user=current_user)
+        serializer_class = BasketSerializer(queryset, many=True)
+        return Response(serializer_class.data)
