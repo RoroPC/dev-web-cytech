@@ -1,10 +1,14 @@
+from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
-from rest_framework import generics, status
+from rest_framework import generics, status, permissions, authentication
+from rest_framework.authentication import SessionAuthentication
 
+from .Validation import custom_validation, validate_email, validate_password
 from .models import Flower, Basket, Category
 from django.contrib.auth.models import User
-from .serializers import FlowerSerializer, BasketSerializer, UserSerializer, CategorySerializer
+from .serializers import FlowerSerializer, BasketSerializer, UserSerializer, CategorySerializer, UserRegisterSerializer, \
+    UserLoginSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
@@ -13,6 +17,7 @@ class FlowerListView(APIView):
     """
         Get list of all the flowers
     """
+
     def get(self, request, format=None):
         queryset = Flower.objects.all()
         serializer_class = FlowerSerializer(queryset, many=True)
@@ -23,6 +28,7 @@ class FlowerDetailView(APIView):
     """
         Get flowers details
     """
+
     def get(self, request, flower_id, format=None):
         try:
             Flower.objects.get(id=flower_id)
@@ -72,6 +78,7 @@ class CategoryListView(APIView):
     """
         Get List of all categories
     """
+
     def get(self, request):
         queryset = Category.objects.all()
         serializer_class = CategorySerializer(queryset, many=True)
@@ -82,6 +89,9 @@ class UserDetailView(APIView):
     """
         Get users details
     """
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
+
     def get(self, request, format=None):
         data = {
             "username": request.user.username,
@@ -96,6 +106,7 @@ class BasketDetailView(APIView):
     """
         Get current user basket
     """
+
     def get(self, request, format=None):
         current_user = request.user.id
         queryset = Basket.objects.filter(user=current_user)
@@ -123,3 +134,41 @@ class BasketDetailView(APIView):
 
         serializer = BasketSerializer(basket)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
+
+
+class UserRegister(APIView):
+    permission_classes = (permissions.AllowAny,)
+
+    def post(self, request):
+        clean_data = custom_validation(request.data)
+        serializer = UserRegisterSerializer(data=clean_data)
+        if serializer.is_valid(raise_exception=True):
+            #serializer.create(clean_data)
+            user = serializer.create(clean_data)
+            if user:
+                return Response(serializer.data, status=status.HTTP_201_CREATED)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+
+class UserLogin(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = (authentication.SessionAuthentication,)
+
+    def post(self, request):
+        data = request.data
+        assert validate_email(data)
+        assert validate_password(data)
+        serializer = UserLoginSerializer(data=data)
+        if serializer.is_valid(raise_exception=True):
+            user = serializer.check_user(data)
+            login(request, user)
+            return Response(serializer.data, status=status.HTTP_200_OK)
+
+
+class UserLogout(APIView):
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
+    def post(self, request):
+        logout(request)
+        return Response(status=status.HTTP_200_OK)
