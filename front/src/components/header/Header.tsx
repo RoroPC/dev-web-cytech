@@ -1,10 +1,13 @@
 import "./Header.scss";
 import logo from "../../assets/images/logo.png";
-import {useState} from "react";
+import {useContext, useState} from "react";
 import {Link} from "react-router-dom";
 import {BASE_URL_WITHOUT_API} from "../../services/api/api.ts";
+import UserContext from "../../contexts/user";
 function Header(){
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const currentUser = useContext(UserContext)
+    const [isConnected,] = useState(currentUser.username != null)
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
@@ -19,7 +22,7 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li><a href={BASE_URL_WITHOUT_API + "/api-auth/login/"}>Connexion</a></li>
+                <li className={`${isConnected ? 'connected':'non-connected'}`}><a href={BASE_URL_WITHOUT_API + "/api-auth/login/"}>Connexion</a></li>
             </ul>
             <button className="no-display-on-desktop mobile-menu-button" onClick={toggleMobileMenu}>
                <span className="burger-icon">
@@ -34,7 +37,7 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li><a href={BASE_URL_WITHOUT_API + "/api-auth/login/"}>Connexion</a></li>
+                <li className={`${isConnected ? 'connected':'non-connected'}`}><a href={BASE_URL_WITHOUT_API + "/api-auth/login/"}>Connexion</a></li>
 
             </ul>
         </header>

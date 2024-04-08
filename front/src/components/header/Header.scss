@@ -73,4 +73,12 @@ header>ul>li>a{
     padding: 0;
   }
 
+  .connected{
+    display: none;
+  }
+
+  .non-connected{
+    display: block;
+  }
+
 }
