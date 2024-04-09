@@ -7,10 +7,12 @@ import UserContext from "../../contexts/user";
 function Header(){
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
     const currentUser = useContext(UserContext)
-    const [isConnected,] = useState(currentUser.username != null)
+    const isConnected = currentUser.username !== null;
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
+    console.log("ça marche !")
+    console.log(currentUser.username !== null)
     return(
         <header>
             <div id="logo">

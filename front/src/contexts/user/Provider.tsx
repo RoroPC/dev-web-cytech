@@ -10,13 +10,19 @@ function Provider({ children }:{children:ReactNode}) {
         first_name:null,
         last_name:null
     });
+    const [value,setValue] = useState(userData);
+
     useEffect(() => {
         getMe().then((user) => {
             setUserData(user);
         });
     }, []);
 
-    return <UserContext.Provider value={userData}>{children}</UserContext.Provider>;
+    useEffect(() => {
+        setValue(userData)
+    }, [userData]);
+
+    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
 }
 
 Provider.propTypes = {

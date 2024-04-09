@@ -1,5 +1,11 @@
 @import "src/assets/variables";
+.connected{
+  display: none;
+}
 
+.non-connected{
+  display: block;
+}
 .no-display-on-mobile{
   display: flex ;
 }
@@ -73,12 +79,6 @@ header>ul>li>a{
     padding: 0;
   }
 
-  .connected{
-    display: none;
-  }
 
-  .non-connected{
-    display: block;
-  }
 
 }
