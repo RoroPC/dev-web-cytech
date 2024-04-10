@@ -9,7 +9,8 @@ import PlantesAMassif from "./pages/plantesAMassif/PlantesAMassif.tsx";
 import Rosiers from "./pages/rosiers/Rosiers.tsx";
 import Contact from "./pages/contact/Contact.tsx";
 import Provider from "../contexts/user/Provider.tsx";
-import ConnectionPage from "./pages/Connection/ConnectionPage.tsx";
+import ConnectionPage from "./pages/connection/ConnectionPage.tsx";
+import RegisterPage from "./pages/register/RegisterPage.tsx";
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
                   <Route path="/rosiers" element={<Rosiers/>}/>
                   <Route path="/contact" element={<Contact/>}/>
                   <Route path="/connection" element={<ConnectionPage/>}/>
+                  <Route path="/register" element={<RegisterPage/>}/>
               </Routes>
 
               <Footer/>

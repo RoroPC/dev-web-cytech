@@ -1,4 +1,4 @@
-
+import "./ConnectionPage.scss";
 
 function ConnectionPage(){
 
