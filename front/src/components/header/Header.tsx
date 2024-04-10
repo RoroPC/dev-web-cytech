@@ -1,7 +1,7 @@
 import "./Header.scss";
 import logo from "../../assets/images/logo.png";
 import {useContext, useState} from "react";
-import {Link, redirect} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {BASE_URL} from "../../services/api/api.ts";
 import UserContext from "../../contexts/user";
 function Header(){
@@ -11,6 +11,8 @@ function Header(){
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
+    const navigate = useNavigate();
+
     //TODO Régler le problème de déconnexion
     return(
         <header>
@@ -26,7 +28,9 @@ function Header(){
                 <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/connection">Connexion</Link></li>
                 <li className={`${isConnected ? 'non-connected' : 'connected'}`}><a
                     onClick={() => {
-                        fetch(BASE_URL + "/logout",{method:"POST"});
+                        fetch(BASE_URL + "/logout",{method:"POST", credentials:"include"}).then(()=>{
+                            navigate("/");
+                        });
                     }}>Déconnexion</a></li>
             </ul>
             <button className="no-display-on-desktop mobile-menu-button" onClick={toggleMobileMenu}>
@@ -46,8 +50,8 @@ function Header(){
                 </li>
                 <li className={`${isConnected ? 'non-connected' : 'connected'}`}><a
                     onClick={() => {
-                        fetch(BASE_URL + "/logout").then(() => {
-                            redirect("/")
+                        fetch(BASE_URL + "/logout",{method:"POST", credentials:"include"}).then(()=>{
+                            navigate("/");
                         });
                     }}>Déconnexion</a></li>
 

@@ -1,8 +1,8 @@
 import "./RegisterPage.scss";
 import {useState} from "react";
 import {BASE_URL} from "../../../services/api/api.ts";
+import {useNavigate} from "react-router-dom";
 
-//import {BASE_URL} from "../../../services/api/api.ts";
 
 function RegisterPage(){
     const [email,setEmail] = useState("");
@@ -11,6 +11,7 @@ function RegisterPage(){
     const [firstname,setFirstname] = useState("");
     const [lastname,setLastname] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
 
     return(
@@ -29,13 +30,16 @@ function RegisterPage(){
                     fetch(BASE_URL+'/register',{
                         method:'POST',
                         headers:{"Content-Type": "application/json"},
+                        credentials:"include",
                         body:JSON.stringify(body)
                     }).then((response)=>{
                         if (response.status != 201){
                             console.error("Erreur lors de la création de l'utilisateur");
-                            setErrorMessage("Une erreur à eu lieu lors de la création de l'utilisateur !")
+                            setErrorMessage("Une erreur à eu lieu lors de la création de l'utilisateur !");
                         }else{
-                            setSuccessMessage("Vous avez bien été inscrit !")
+                            setSuccessMessage("Vous avez bien été inscrit !");
+                            window.location.reload();
+                            navigate("/");
                         }
                     })
                 }else{
@@ -58,7 +62,7 @@ function RegisterPage(){
                 <label htmlFor="register-password">Mot de passe : </label>
                 <input type="password" id="register-password" onChange={(event) => {
                     setPassword(event.target.value);
-                    if (password.length<7){
+                    if (password.length<7 ){
                         setErrorMessage("Le mot de passe doit contenir au moins 8 caractères.");
                     }else{
                         setErrorMessage("")
