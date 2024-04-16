@@ -1,7 +1,7 @@
 import "./RegisterPage.scss";
 import {useState} from "react";
 import {BASE_URL} from "../../../services/api/api.ts";
-import {useNavigate} from "react-router-dom";
+import Cookies from "js-cookie";
 
 
 function RegisterPage(){
@@ -11,7 +11,6 @@ function RegisterPage(){
     const [firstname,setFirstname] = useState("");
     const [lastname,setLastname] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    const navigate = useNavigate();
 
 
     return(
@@ -20,12 +19,14 @@ function RegisterPage(){
             <form id="user"  method="POST" onSubmit={(event)=>{
                 event.preventDefault()
                 if (firstname != "" && lastname != "" && email != "" && password != "") {
+                    const crsfCookie = Cookies.get("csrftoken");
                     const body = {
                         username:email,
                         email:email,
                         firstName:firstname,
                         lastName:lastname,
-                        password: password
+                        password: password,
+                        csrfmiddlewaretoken:crsfCookie,
                     }
                     fetch(BASE_URL+'/register',{
                         method:'POST',
@@ -38,8 +39,6 @@ function RegisterPage(){
                             setErrorMessage("Une erreur à eu lieu lors de la création de l'utilisateur !");
                         }else{
                             setSuccessMessage("Vous avez bien été inscrit !");
-                            window.location.reload();
-                            navigate("/");
                         }
                     })
                 }else{

@@ -40,6 +40,11 @@ Pour lancer le server Rest :
 python manage.py runserver
 ```
 
+ou en HTTPS (recommandé): 
+```
+python manage.py runserver_plus --cert-file cert.pem --key-file key.pem
+```
+
 ### Avec docker
 Sur un environnement Unix avec docker installer, le script ```launch.sh``` lance le back.
 

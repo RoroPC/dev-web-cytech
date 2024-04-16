@@ -1,13 +1,15 @@
 import "./ConnectionPage.scss";
 import {useState} from "react";
 import {BASE_URL} from "../../../services/api/api.ts";
-import { useNavigate } from "react-router-dom";
+import Cookies from 'js-cookie'
+
+
 
 function ConnectionPage(){
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
-    const navigate = useNavigate();
+
 
     return(
         <main>
@@ -15,9 +17,11 @@ function ConnectionPage(){
             <form id="login" onSubmit={(event)=>{
                 event.preventDefault();
                 if (email != "" && password != ""){
+                    const crsfCookie = Cookies.get("csrftoken");
                     const body = {
                         email:email,
                         password:password,
+                        csrfmiddlewaretoken:crsfCookie,
                     }
 
                     fetch(BASE_URL+'/login',{
@@ -29,9 +33,7 @@ function ConnectionPage(){
                         if (response.status != 201 && response.status != 200){
                             setErrorMessage("Email ou mot de passe incorrecte !")
                         }else{
-                            console.log(response.headers)
-                            window.location.reload();
-                            navigate("/");
+                            console.log(response.headers);
                         }
                     })
                 }

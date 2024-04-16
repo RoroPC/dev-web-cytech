@@ -25,10 +25,13 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/connection">Connexion</Link></li>
+                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/connection">Connexion</Link>
+                </li>
+                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/register">Inscription</Link>
+                </li>
                 <li className={`${isConnected ? 'non-connected' : 'connected'}`}><a
                     onClick={() => {
-                        fetch(BASE_URL + "/logout",{method:"POST", credentials:"include"}).then(()=>{
+                        fetch(BASE_URL + "/logout", {method: "POST", credentials: "include"}).then(() => {
                             navigate("/");
                         });
                     }}>Déconnexion</a></li>
@@ -48,9 +51,11 @@ function Header(){
                 <li><Link to="/contact">Contact</Link></li>
                 <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/connection">Connexion</Link>
                 </li>
+                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/register">Inscription</Link>
+                </li>
                 <li className={`${isConnected ? 'non-connected' : 'connected'}`}><a
                     onClick={() => {
-                        fetch(BASE_URL + "/logout",{method:"POST", credentials:"include"}).then(()=>{
+                        fetch(BASE_URL + "/logout", {method: "POST", credentials: "include"}).then(() => {
                             navigate("/");
                         });
                     }}>Déconnexion</a></li>
