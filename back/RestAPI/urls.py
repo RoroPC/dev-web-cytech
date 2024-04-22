@@ -6,7 +6,7 @@ from .views import FlowerListView, FlowerListViewByCategory, BasketDetailView, U
 urlpatterns = [
     path('flowers/', FlowerListView.as_view(), name='flowers'),
     path('flowers/category/<int:category_id>/', FlowerListViewByCategory.as_view(), name='flower-list-by-category'),
-    path('flowers/<int:flower_id>/', login_required(FlowerDetailView.as_view()), name='flower-detail'),
+    path('flowers/<int:flower_id>/', FlowerDetailView.as_view(), name='flower-detail'),
     path('basket/', login_required(BasketDetailView.as_view()), name='user-basket'),
     path('me/', login_required(UserDetailView.as_view()), name='user-detail'),
     path('register', UserRegister.as_view(), name='register'),

@@ -4,3 +4,7 @@ djangorestframework==3.14.0
 pytz==2023.4
 sqlparse==0.4.4
 typing_extensions==4.9.0
+django-cors-headers==4.3.1
+django-extensions==3.2.3
+Werkzeug==3.0.2
+pyOpenSSL==24.1.0

@@ -1,5 +1,12 @@
 @import "src/assets/variables";
+.connected{
+  display: none;
+}
 
+.non-connected{
+  display: block;
+  cursor: pointer;
+}
 .no-display-on-mobile{
   display: flex ;
 }
@@ -72,5 +79,7 @@ header>ul>li>a{
     list-style-type: none;
     padding: 0;
   }
+
+
 
 }

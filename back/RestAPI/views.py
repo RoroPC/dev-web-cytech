@@ -17,6 +17,8 @@ class FlowerListView(APIView):
     """
         Get list of all the flowers
     """
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
 
     def get(self, request, format=None):
         queryset = Flower.objects.all()
@@ -28,6 +30,8 @@ class FlowerDetailView(APIView):
     """
         Get flowers details
     """
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
 
     def get(self, request, flower_id, format=None):
         try:
@@ -63,6 +67,9 @@ class FlowerListViewByCategory(generics.ListAPIView):
     """
         Get flowers from a category
     """
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
+
     serializer_class = FlowerSerializer
 
     def get_queryset(self):
@@ -78,6 +85,8 @@ class CategoryListView(APIView):
     """
         Get List of all categories
     """
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
 
     def get(self, request):
         queryset = Category.objects.all()
@@ -106,6 +115,8 @@ class BasketDetailView(APIView):
     """
         Get current user basket
     """
+    permission_classes = (permissions.AllowAny,)
+    authentication_classes = ()
 
     def get(self, request, format=None):
         current_user = request.user.id
