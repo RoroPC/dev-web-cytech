@@ -16,7 +16,7 @@ function ProductItem({refer, title, img, price, stock}:ProductItemType) {
             {seeStock && (
                 <div className="product-item__info__stock--visible">{stock}</div>
             )}
-            <button onClick={()=> setSeeStock(true)}>Stock</button>
+            <button onClick={()=> setSeeStock(!seeStock)}>Stock</button>
         </div>
     );
 }
