@@ -6,6 +6,7 @@ import {useState} from "react";
 
 function ProductItem({refer, title, img, price, stock}:ProductItemType) {
     const [seeStock, setSeeStock] = useState(false);
+    const [qtOrder, setqtOrder] = useState(0);
     return (
         <div className="product-item" id={refer}>
             <div className="product-item__image">
@@ -16,7 +17,25 @@ function ProductItem({refer, title, img, price, stock}:ProductItemType) {
             {seeStock && (
                 <div className="product-item__info__stock--visible">{stock}</div>
             )}
-            <button onClick={()=> setSeeStock(!seeStock)}>Stock</button>
+            <button onClick={() => setSeeStock(!seeStock)}>Stock</button>
+
+
+            <button disabled={qtOrder == 0} onClick={() => {
+                if (qtOrder > 0) {
+                    setqtOrder(qtOrder - 1)
+                }
+            }}>-
+            </button>
+            <div className="product-item__info__qtOrder">{qtOrder} qt</div>
+
+            <button disabled={qtOrder == stock} onClick={() => {
+                if (qtOrder < stock) {
+                    setqtOrder(qtOrder + 1)
+                }
+            }}>+
+            </button>
+
+            <button>Ajouter Panier</button>
         </div>
     );
 }
