@@ -21,10 +21,11 @@ Sur un environnement Unix avec docker installer, le script ```launch.sh``` lance
 ## Back
 ### Sans docker
 Le back utilise Django (Rest) :
-Pour installer les dependances :
+Pour installer les dependances (avec un environement virtuel):
 ```
 cd back
-python -m venv ./     
+python -m venv .venv     
+source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
@@ -48,6 +49,14 @@ python manage.py runserver_plus --cert-file cert.pem --key-file key.pem
 ### Avec docker
 Sur un environnement Unix avec docker installer, le script ```launch.sh``` lance le back.
 
+### Accéder au l'interface administrateur 
+Utiliser ce lien : https://127.0.0.1:8000/admin/ (ou URL différente si docker)  
+Login : **test**  
+Mot de passe : **test**
+
+### Accéder au site web
+Accés à l'UI : 
+http://localhost:5173/
 
 #### Structure UML
 
