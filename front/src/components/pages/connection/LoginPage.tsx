@@ -2,6 +2,8 @@ import "./LoginPage.scss";
 import {useState} from "react";
 import {BASE_URL} from "../../../services/api/api.ts";
 import Cookies from 'js-cookie'
+import {useUser} from "../../../contexts/user";
+import {getMe} from "../../../services/api/users.ts";
 
 
 
@@ -10,6 +12,7 @@ function LoginPage(){
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
 
+    const { setUserData } = useUser();
 
     return(
         <main>
@@ -33,6 +36,9 @@ function LoginPage(){
                         if (response.status != 201 && response.status != 200){
                             setErrorMessage("Email ou mot de passe incorrecte !")
                         }else{
+                            getMe().then((user) => {
+                                setUserData(user);
+                            });
                             console.log(response.headers);
                         }
                     })

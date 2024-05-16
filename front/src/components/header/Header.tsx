@@ -1,17 +1,19 @@
 import "./Header.scss";
 import logo from "../../assets/images/logo.png";
-import {useContext, useState} from "react";
-import {Link, useNavigate} from "react-router-dom";
+import {useState} from "react";
+import {Link} from "react-router-dom";
 import {BASE_URL} from "../../services/api/api.ts";
-import UserContext from "../../contexts/user";
+import  {useUser} from "../../contexts/user";
 function Header(){
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
-    const currentUser = useContext(UserContext)
-    const isConnected = currentUser.username !== null;
+    const currentUser = useUser()
+
+    const [isConnectedState,setIsConnectedState] = useState(currentUser.userData !== null);
+
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
-    const navigate = useNavigate();
+    const { setUserData } = useUser();
 
     //TODO Régler le problème de déconnexion
     return(
@@ -25,14 +27,15 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/connection">Connexion</Link>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link to="/login">Connexion</Link>
                 </li>
-                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/register">Inscription</Link>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link to="/register">Inscription</Link>
                 </li>
-                <li className={`${isConnected ? 'non-connected' : 'connected'}`}><a
+                <li className={`${isConnectedState ? 'non-connected' : 'connected'}`}><a
                     onClick={() => {
                         fetch(BASE_URL + "/logout", {method: "POST", credentials: "include"}).then(() => {
-                            navigate("/");
+                            setUserData(null);
+                            setIsConnectedState(false);
                         });
                     }}>Déconnexion</a></li>
             </ul>
@@ -49,14 +52,15 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/connection">Connexion</Link>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link to="/login">Connexion</Link>
                 </li>
-                <li className={`${isConnected ? 'connected' : 'non-connected'}`}><Link to="/register">Inscription</Link>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link to="/register">Inscription</Link>
                 </li>
-                <li className={`${isConnected ? 'non-connected' : 'connected'}`}><a
+                <li className={`${isConnectedState ? 'non-connected' : 'connected'}`}><a
                     onClick={() => {
                         fetch(BASE_URL + "/logout", {method: "POST", credentials: "include"}).then(() => {
-                            navigate("/");
+                            setUserData(null);
+                            setIsConnectedState(false);
                         });
                     }}>Déconnexion</a></li>
 

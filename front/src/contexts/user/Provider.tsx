@@ -1,16 +1,13 @@
-import {ReactNode, useEffect, useState} from "react";
+import { ReactNode, useEffect, useState} from "react";
 import PropTypes from "prop-types";
 import UserContext from "./index";
 import {getMe} from "../../services/api/users.ts";
 import {UserType} from "./UserType.ts";
+//import {UserType} from "./UserType.ts";
+
+
 function Provider({ children }:{children:ReactNode}) {
-    const [userData, setUserData] = useState<UserType>({
-        username:null,
-        email: null,
-        first_name:null,
-        last_name:null
-    });
-    const [value,setValue] = useState(userData);
+    const [userData, setUserData] = useState<UserType>(null);
 
     useEffect(() => {
         getMe().then((user) => {
@@ -18,11 +15,7 @@ function Provider({ children }:{children:ReactNode}) {
         });
     }, []);
 
-    useEffect(() => {
-        setValue(userData)
-    }, [userData]);
-
-    return <UserContext.Provider value={value}>{children}</UserContext.Provider>;
+    return <UserContext.Provider value={{userData, setUserData}}>{children}</UserContext.Provider>;
 }
 
 Provider.propTypes = {
