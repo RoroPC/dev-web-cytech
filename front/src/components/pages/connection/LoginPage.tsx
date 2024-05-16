@@ -1,11 +1,11 @@
-import "./ConnectionPage.scss";
+import "./LoginPage.scss";
 import {useState} from "react";
 import {BASE_URL} from "../../../services/api/api.ts";
 import Cookies from 'js-cookie'
 
 
 
-function ConnectionPage(){
+function LoginPage(){
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
@@ -58,4 +58,4 @@ function ConnectionPage(){
     )
 }
 
-export default ConnectionPage;
+export default LoginPage;
