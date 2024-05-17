@@ -9,7 +9,7 @@ import PlantesAMassif from "./pages/plantesAMassif/PlantesAMassif.tsx";
 import Rosiers from "./pages/rosiers/Rosiers.tsx";
 import Contact from "./pages/contact/Contact.tsx";
 import Provider from "../contexts/user/Provider.tsx";
-import LoginPage from "./pages/connection/LoginPage.tsx";
+import LoginPage from "./pages/login/LoginPage.tsx";
 import RegisterPage from "./pages/register/RegisterPage.tsx";
 
 function App() {

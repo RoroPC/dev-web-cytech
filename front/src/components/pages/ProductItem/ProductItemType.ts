@@ -1,6 +1,6 @@
 type ProductItemType = {
-    refer: string,
-    title: string,
+    id: string,
+    name: string,
     img: string,
     price: number
     stock: number
