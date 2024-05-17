@@ -26,6 +26,16 @@
   text-align: center;
 
 }
+.product-item__info__stock{
+  border-radius: $border-radius;
+  background-color: $dark-orange;
+  color: white;
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+
+}
 
 .product-item__image>img{
   border-radius: $border-radius;

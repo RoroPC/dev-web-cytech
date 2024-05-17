@@ -3,6 +3,7 @@ type ProductItemType = {
     title: string,
     img: string,
     price: number
+    stock: number
 }
 
 export default ProductItemType;
