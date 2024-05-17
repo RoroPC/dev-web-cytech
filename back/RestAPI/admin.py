@@ -6,7 +6,7 @@ from RestAPI.models import Flower, Basket, Category
 
 class FlowerAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'price', 'stock')
-
+    list_editable = ['stock','name','price']
     def display_category(self, obj):
         return obj.Category.name if obj.category else '-'
 
