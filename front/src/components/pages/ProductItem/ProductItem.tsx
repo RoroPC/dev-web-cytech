@@ -53,7 +53,7 @@ function ProductItem({id, name, img, price, stock}:ProductItemType) {
                     else setStockState(newStock);
                 }).catch(error=>(console.log("Error while updating the stock : "+error)));
 
-            }}>Ajouter Panier</button>
+            }}>Commander</button>
         </div>
     );
 }
