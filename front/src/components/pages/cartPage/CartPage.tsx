@@ -1,9 +1,10 @@
 import {useContext, useEffect, useState} from "react";
 import {CartContext} from "../../../contexts/cart";
-import {BASE_URL} from "../../../services/api/api.ts";
+import {BASE_URL, } from "../../../services/api/api.ts";
 import {ProductItemOrder} from "../../../contexts/cart/ProductItemOrder.ts";
 import './CartPage.scss'
 import {useUser} from "../../../contexts/user";
+
 
 function CartPage(){
     const cartContext = useContext(CartContext);
@@ -21,7 +22,20 @@ function CartPage(){
         setIsConnectedState((userData !== undefined && userData !== null))
     }, [userData]);
 
+    const [csrfToken, setCsrfToken] = useState('');
+    useEffect(() => {
+        fetch(BASE_URL + "/csrf/", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                setCsrfToken(data.csrfToken)
+            });
 
+    }, []);
+
+    const [hasOrdered, setHasOrdered] = useState(false);
     return(
         <main className="cart">
             <h1>Panier</h1>
@@ -53,13 +67,18 @@ function CartPage(){
                     <button onClick={() => {
                         const flowerList: string[] = []
                         cart?.map((itemToOrder) => {
-                            changeStock(itemToOrder.item.stock, itemToOrder.quantity, itemToOrder.item.id)
-                            flowerList.push(itemToOrder.item.id)
+                            changeStock(itemToOrder.item.stock, itemToOrder.quantity, itemToOrder.item.id);
+                            flowerList.push(itemToOrder.item.id);
+                            deleteFromCart(itemToOrder);
+                            setCart([]);
+                            setHasOrdered(true);
                         })
-                        updateUserBasket(flowerList)
+                        updateUserBasket(flowerList,csrfToken)
+
                     }} disabled={cart?.length === 0 || cart == undefined || !isConnectedState}
                             className="cart__order__btn">Commander
                     </button>
+                    <h3 className={ hasOrdered ?"cart__ordered" : "cart__connected"}>Votre commande à été prise en compte avec succès !</h3>
                 </div>
             </div>
         </main>
@@ -69,6 +88,7 @@ function CartPage(){
 function changeStock(stock: number, qtOrder: number, id: string) {
     const newStock = stock - qtOrder;
     const stockData = {stock: newStock};
+
     if (newStock >= 0) {
         fetch(BASE_URL + "/flowers/" + id + "/",
             {
@@ -85,12 +105,17 @@ function changeStock(stock: number, qtOrder: number, id: string) {
 
 }
 
-function updateUserBasket(flowerList:string[]){
-    const requestObject = {flowers:flowerList}
+function updateUserBasket(flowerList:string[],csrf:string){
+    const intArray:number[] = [];
+    flowerList.forEach(e=>{
+        intArray.push(parseInt(e))
+    })
+    const requestObject = {flowers:intArray}
     fetch(BASE_URL+"/basket/",{
         method:'POST',
         headers: {
             'Content-Type': 'application/json',
+            'X-CSRFToken': csrf
         },
         body: JSON.stringify(requestObject),
         credentials:"include"
