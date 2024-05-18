@@ -55,8 +55,11 @@ Login : **test**
 Mot de passe : **test**
 
 ### Accéder au site web
-Accés à l'UI : 
+Accés à l'UI sans docker : 
 http://localhost:5173/
+
+Accés à l'UI avec docker :
+http://localhost:3000/
 
 ### Débuggage 
 Si la connexion/inscription ne fonctionne pas, et que dans la console du navigateur vous avez une erreur du type : NET::ERR_CERT_AUTHORITY_INVALID  
