@@ -1,87 +1,37 @@
 @import "src/assets/variables";
 
-.contact__img{
-  display: none;
-}
 
-.contact__form{
-  display: flex;
-  width: 98%;
-  justify-content: center;
-}
-.contact__form>form{
-  display: flex;
-  width: 98%;
-  flex-direction: column;
-  gap: 1vh;
-}
-.contact__input{
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-}
-.contact__input>input, .contact__input>select, .contact__input>textarea{
-  border: $green solid 1px;
-  border-radius: 3px;
-}
-input:focus-visible,select:focus-visible, textarea:focus-visible{
-  border: $dark-orange solid 2px;
-  outline-offset: 0;
-  outline: $dark-orange;
-}
-.contact__submit__btn{
-  justify-self: center;
-  padding: 1rem 1rem ;
-  border-radius: $border-radius;
-  color: white;
-  background-color: $dark-orange;
-  box-shadow:0 0 0 #365736 ;
-  border: none;
-}
 
 .text__error{
   color: darkred;
 }
+.login__form{
+  display: flex;
+  flex-direction: column;
+  width: 60%;
+  gap: 2vh;
+}
 
+.login__form>button{
+  border-radius: $border-radius;
+  background-color: $dark-orange;
+  color: white;
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  border: 0;
+}
 @media screen and (min-width:820px){
-  .contact__form>form{
-    width: 70%;
-  }
-  .contact__input{
-    height: 100%;
-  }
-  .contact__input>label{
-    font-size: large;
-  }
-  .contact__input>input{
-    height: 100%;
-  }
+
 }
 
 @media screen and (min-width:1180px){
-  .contact__form{
-    display: flex;
-    gap: 2vw;
-  }
-  .contact__img{
-    display: block;
-    width: 40%;
-  }
-  .contact__form>form{
-    width: 50%;
+  .login__form{
     background-color: $light-orange;
-    padding: 3vh;
+    padding: 10px 10px;
     border-radius: $border-radius;
-  }
-  .contact__input{
-    flex-direction: column;
-    gap: 1vh;
-    height: 20%;
-  }
-  .contact__input>input,  .contact__input>select,  .contact__input>textarea{
-    width: 80%;
-  }
-  .contact__submit__btn{
-    width: 50%;
+    width: 30%;
+
   }
 }
