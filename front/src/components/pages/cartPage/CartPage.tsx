@@ -52,7 +52,7 @@ function CartPage(){
                                 <p>Quantité : {itemToOrder.quantity}</p>
                                 <button onClick={()=>{
                                     deleteFromCart(itemToOrder);
-                                }}>Supprimer</button>
+                                }} className="cart__delete__btn">Supprimer</button>
                             </div>
                         ))}
                     </div>

@@ -17,7 +17,7 @@
   gap: 2vh;
 }
 
-.cart__order__btn{
+.cart__order__btn,.cart__delete__btn{
   border-radius: $border-radius;
   background-color: $dark-orange;
   color: white;
@@ -27,7 +27,7 @@
   text-align: center;
   border: 0;
 }
-.cart__order__btn:hover{
+.cart__order__btn:hover,.cart__delete__btn:hover{
   background-color: $dark-orange;
   border: $dark-orange solid 2px;
   cursor: pointer;
