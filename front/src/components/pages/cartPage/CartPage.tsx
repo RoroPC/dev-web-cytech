@@ -1,8 +1,9 @@
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {CartContext} from "../../../contexts/cart";
 import {BASE_URL} from "../../../services/api/api.ts";
 import {ProductItemOrder} from "../../../contexts/cart/ProductItemOrder.ts";
 import './CartPage.scss'
+import {useUser} from "../../../contexts/user";
 
 function CartPage(){
     const cartContext = useContext(CartContext);
@@ -12,7 +13,15 @@ function CartPage(){
 
     const [cart, setCart] = useState(cartContext.cart)
     const {deleteFromCart} = cartContext
-    console.log(cart?.length)
+
+    const {userData } = useUser();
+
+    const [isConnectedState,setIsConnectedState] = useState((userData !== undefined && userData !== null));
+    useEffect(() => {
+        setIsConnectedState((userData !== undefined && userData !== null))
+    }, [userData]);
+
+
     return(
         <main className="cart">
             <h1>Panier</h1>
@@ -35,13 +44,21 @@ function CartPage(){
                         ))}
                     </div>
                 )}
-                <div>
+                <div className="cart__btn__container">
+
                     <h3>Prix totale : {calculatePrice(cart)} €</h3>
+                    <p className={isConnectedState ? "cart__connected" : "cart__not__connected"}>Vous n'êtes pas
+                        connecté !</p>
+
                     <button onClick={() => {
+                        const flowerList: string[] = []
                         cart?.map((itemToOrder) => {
                             changeStock(itemToOrder.item.stock, itemToOrder.quantity, itemToOrder.item.id)
+                            flowerList.push(itemToOrder.item.id)
                         })
-                    }} disabled={cart?.length === 0 || cart == undefined} className="cart__order__btn">Commander
+                        updateUserBasket(flowerList)
+                    }} disabled={cart?.length === 0 || cart == undefined || !isConnectedState}
+                            className="cart__order__btn">Commander
                     </button>
                 </div>
             </div>
@@ -65,6 +82,19 @@ function changeStock(stock: number, qtOrder: number, id: string) {
             if (!response.ok) console.log("Error while updating stock ! " + response.status)
         }).catch(error => (console.log("Error while updating the stock : " + error)));
     }
+
+}
+
+function updateUserBasket(flowerList:string[]){
+    const requestObject = {flowers:flowerList}
+    fetch(BASE_URL+"/basket/",{
+        method:'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(requestObject),
+        credentials:"include"
+    }).then(response =>{ if(!response.ok)console.log("User not connected")});
 
 }
 

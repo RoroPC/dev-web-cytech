@@ -39,7 +39,6 @@ function LoginPage(){
                             getMe().then((user) => {
                                 setUserData(user);
                             });
-                            console.log(response.headers);
                         }
                     })
                 }
