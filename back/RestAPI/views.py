@@ -11,6 +11,7 @@ from .serializers import FlowerSerializer, BasketSerializer, UserSerializer, Cat
     UserLoginSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.middleware.csrf import get_token
 
 
 class FlowerListView(APIView):
@@ -110,13 +111,12 @@ class UserDetailView(APIView):
         }
         return Response(data)
 
-
 class BasketDetailView(APIView):
     """
         Get current user basket
     """
-    permission_classes = (permissions.AllowAny,)
-    authentication_classes = ()
+    permission_classes = (permissions.IsAuthenticated,)
+    authentication_classes = (SessionAuthentication,)
 
     def get(self, request, format=None):
         current_user = request.user.id
@@ -183,3 +183,10 @@ class UserLogout(APIView):
     def post(self, request):
         logout(request)
         return Response(status=status.HTTP_200_OK)
+
+
+class CsrfTokenView(APIView):
+    permission_classes = [permissions.AllowAny]
+
+    def get(self, request, *args, **kwargs):
+        return Response({'csrfToken': get_token(request)})

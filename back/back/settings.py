@@ -64,6 +64,9 @@ CORS_ALLOW_CREDENTIALS = True
 SESSION_COOKIE_SAMESITE = 'None'
 CSRF_COOKIE_SAMESITE = 'None'  # If using CSRF protection
 
+CSRF_COOKIE_HTTPONLY = False  # Doit être False pour que JavaScript puisse accéder au cookie
+SESSION_COOKIE_HTTPONLY = False
+
 SECURE_PROXY_SSL_HEADER = None
 
 SESSION_COOKIE_SECURE = True

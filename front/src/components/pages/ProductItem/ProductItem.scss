@@ -16,14 +16,14 @@
 
 }
 
+
+
 .product-item__info__price{
-  border-radius: $border-radius;
-  background-color: $dark-orange;
-  color: white;
   width: 150px;
-  padding-top: 10px;
-  padding-bottom: 10px;
+  border-radius: $border-radius;
+  border: black solid 2px;
   text-align: center;
+  color: black;
 
 }
 .product-item__info__stock{
@@ -48,6 +48,61 @@
   justify-content: center;
 }
 
+.product-item__info__plus{
+  all: unset;
+  text-align: center;
+  border-radius: 50px;
+  background: $dark-orange;
+  color: white;
+  font-family: Poppins, sans-serif;
+  padding: 2px 10px;
+}
+
+.product-item__info__plus:hover{
+  cursor: pointer;
+}
+
+
+
+.product-item__info__btn{
+  all: unset;
+  text-align: center;
+  border-radius: $border-radius;
+  color: black;
+  font-family: Poppins, sans-serif;
+  padding: 2px 10px;
+  border: black solid 2px;
+  transition: background-color, border 0.5s;
+}
+
+.product-item__info__order{
+  border-radius: $border-radius;
+  background-color: $dark-orange;
+  color: white;
+  width: 150px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  border: 0;
+}
+.product-item__info__btn:hover{
+  background-color: $dark-orange;
+  border: $dark-orange solid 2px;
+  cursor: pointer;
+
+}
+
+.product-item__info__plus:disabled, .product-item__info__order:disabled{
+  background: gray;
+
+}
+
+.product-item__info__btn:disabled:hover{
+  background: gray;
+  border: 0;
+  cursor: not-allowed;
+}
+
 @media screen and (min-width:820px){
   .product-item{
     flex-direction: row;
@@ -64,7 +119,7 @@
     height: 250px;
   }
 
-  .product-item__info__price{
+  .product-item__info__order{
     color: white;
     width: 150px;
     padding-top: 10px;
@@ -73,6 +128,7 @@
     flex-basis: 33%;
 
   }
+
 }
 
 @media screen and (min-width:1180px){
@@ -83,4 +139,19 @@
     justify-content: space-around;
     padding: 1vh;
   }
+  .product-item__info__price, .product-item__info__btn{
+    color: white;
+    border: white solid 2px;
+
+  }
+
+  .product-item__info__btn:disabled{
+    border: 0;
+
+  }
+  .product-item__info__order{
+    background: 0;
+
+  }
+
 }

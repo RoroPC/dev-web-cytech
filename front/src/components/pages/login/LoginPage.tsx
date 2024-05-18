@@ -39,11 +39,10 @@ function LoginPage(){
                             getMe().then((user) => {
                                 setUserData(user);
                             });
-                            console.log(response.headers);
                         }
                     })
                 }
-            }}>
+            }} className="login__form">
                 <label htmlFor="register-email">Adresse email : </label>
                 <input type="email" id="register-email" onChange={(event)=>{
                     setEmail(event.target.value);

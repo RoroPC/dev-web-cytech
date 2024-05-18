@@ -16,7 +16,7 @@ function RegisterPage(){
     return(
         <main>
             <h1>Inscription</h1>
-            <form id="user"  method="POST" onSubmit={(event)=>{
+            <form id="user"  method="POST" className="login__form" onSubmit={(event)=>{
                 event.preventDefault()
                 if (firstname != "" && lastname != "" && email != "" && password != "") {
                     const crsfCookie = Cookies.get("csrftoken");
