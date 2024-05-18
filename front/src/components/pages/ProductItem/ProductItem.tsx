@@ -2,13 +2,23 @@
 import "./ProductItem.scss";
 import ProductItemType from "./ProductItemType.ts"
 import PropTypes from "prop-types";
-import {useState} from "react";
-import {BASE_URL} from "../../../services/api/api.ts";
+import {useContext, useState} from "react";
+import {CartContext} from "../../../contexts/cart";
+import {ProductItemOrder} from "../../../contexts/cart/ProductItemOrder.ts";
 
 function ProductItem({id, name, img, price, stock}:ProductItemType) {
     const [seeStock, setSeeStock] = useState(false);
     const [qtOrder, setqtOrder] = useState(0);
-    const [stockState, setStockState] = useState(stock)
+    const [stockState,] = useState(stock)
+
+    const cartContext = useContext(CartContext);
+    let addToCart = (product:ProductItemOrder)=>{
+        product;
+    };
+    if (cartContext != undefined){
+        addToCart = cartContext.addToCart;
+    }
+
     return (
         <div className="product-item" id={id}>
             <div className="product-item__image">
@@ -16,44 +26,33 @@ function ProductItem({id, name, img, price, stock}:ProductItemType) {
             </div>
             <div className="product-item__info__title">{name}</div>
             <div className="product-item__info__price">{price} $</div>
-            {seeStock && (
-                <div className="product-item__info__stock--visible">{stockState}</div>
-            )}
-            <button onClick={() => setSeeStock(!seeStock)}>Stock</button>
 
 
-            <button disabled={qtOrder == 0} onClick={() => {
+            <button className="product-item__info__plus" disabled={qtOrder == 0} onClick={() => {
                 if (qtOrder > 0) {
                     setqtOrder(qtOrder - 1)
                 }
             }}>-
             </button>
-            <div className="product-item__info__qtOrder">{qtOrder} qt</div>
+            <div className="product-item__info__qtOrder">{qtOrder}</div>
 
             <button disabled={qtOrder == stock} onClick={() => {
                 if (qtOrder < stock) {
                     setqtOrder(qtOrder + 1)
                 }
-            }}>+
+            }} className="product-item__info__plus">+
             </button>
 
-            <button onClick={()=>{
-                const newStock = stock- qtOrder;
-                const stockData = {stock:newStock};
-                fetch(BASE_URL+"/flowers/"+id+"/",
-                    {
-                        method:'PATCH',
-                        headers:{
-                            'Content-Type': 'application/json',
-                        },
-                        body: JSON.stringify(stockData),
-                        credentials: "include"
-                }).then(response => {
-                    if(!response.ok) console.log("Error while updating stock ! "+response.status)
-                    else setStockState(newStock);
-                }).catch(error=>(console.log("Error while updating the stock : "+error)));
-
-            }}>Commander</button>
+            <button onClick={() => {
+                const item = {id, name, img, price, stock}
+                const itemOrder: ProductItemOrder = {item, quantity:qtOrder}
+                addToCart(itemOrder)
+            }} disabled={qtOrder == 0} className="product-item__info__btn product-item__info__order">Ajouter au panier
+            </button>
+            <button onClick={() => setSeeStock(!seeStock)} className="product-item__info__btn">Stock</button>
+            {seeStock && (
+                <div className="product-item__info__stock--visible">{stockState}</div>
+            )}
         </div>
     );
 }
