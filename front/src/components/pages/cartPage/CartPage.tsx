@@ -52,7 +52,6 @@ function CartPage(){
                                 <p>Quantité : {itemToOrder.quantity}</p>
                                 <button onClick={()=>{
                                     deleteFromCart(itemToOrder);
-                                    setCart(cart.filter(item => item.item.id !== itemToOrder.item.id))
                                 }}>Supprimer</button>
                             </div>
                         ))}
@@ -69,10 +68,12 @@ function CartPage(){
                         cart?.map((itemToOrder) => {
                             changeStock(itemToOrder.item.stock, itemToOrder.quantity, itemToOrder.item.id);
                             flowerList.push(itemToOrder.item.id);
-                            deleteFromCart(itemToOrder);
-                            setCart([]);
-                            setHasOrdered(true);
                         })
+                        cart?.forEach(flower=>{
+                            deleteFromCart(flower);
+                        })
+                        setCart([])
+                        setHasOrdered(true);
                         updateUserBasket(flowerList,csrfToken)
 
                     }} disabled={cart?.length === 0 || cart == undefined || !isConnectedState}
