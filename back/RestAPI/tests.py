@@ -7,10 +7,10 @@ from django.test import TestCase
 from django.test import TestCase, RequestFactory
 from django.contrib.auth.models import User
 from rest_framework.test import APIRequestFactory
-from .models import Flower, Basket, Category
-from .serializers import BasketSerializer
+from .models import Flower, Order, Category
+from .serializers import OrderSerializer
 from .views import FlowerListView, FlowerDetailView, FlowerListViewByCategory, CategoryListView, UserDetailView, \
-    BasketDetailView
+    OrderDetailView
 
 
 class FlowerListViewTestCase(TestCase):
@@ -57,7 +57,7 @@ class FlowerDetailViewTestCase(TestCase):
         Flower.objects.all().delete()
 
 
-class BasketDetailViewTestCase(TestCase):
+class OrderDetailViewTestCase(TestCase):
     def setUp(self):
         self.factory = APIRequestFactory()
         self.user = User.objects.create(username='test_user', email='test@example.com')
@@ -68,16 +68,16 @@ class BasketDetailViewTestCase(TestCase):
         self.flower2 = Flower.objects.create(name='Lily', category=self.category, price=8, stock=30)
 
     def test_get_basket(self):
-        basket = Basket.objects.create(user=self.user)
+        basket = Order.objects.create(user=self.user)
         basket.flowers.add(self.flower1, self.flower2)
 
         request = self.factory.get('/basket/')
         request.user = self.user
-        view = BasketDetailView.as_view()
+        view = OrderDetailView.as_view()
         response = view(request)
 
         self.assertEqual(response.status_code, 200)
-        expected_data = BasketSerializer(basket).data
+        expected_data = OrderSerializer(basket).data
         self.assertEqual(response.data[0], OrderedDict(expected_data))
 
     """

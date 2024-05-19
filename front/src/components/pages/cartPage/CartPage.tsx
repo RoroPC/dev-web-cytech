@@ -74,7 +74,7 @@ function CartPage(){
                         })
                         setCart([])
                         setHasOrdered(true);
-                        updateUserBasket(flowerList,csrfToken)
+                        updateUserOrder(flowerList,csrfToken)
 
                     }} disabled={cart?.length === 0 || cart == undefined || !isConnectedState}
                             className="cart__order__btn">Commander
@@ -106,13 +106,13 @@ function changeStock(stock: number, qtOrder: number, id: string) {
 
 }
 
-function updateUserBasket(flowerList:string[],csrf:string){
+function updateUserOrder(flowerList:string[],csrf:string){
     const intArray:number[] = [];
     flowerList.forEach(e=>{
         intArray.push(parseInt(e))
     })
     const requestObject = {flowers:intArray}
-    fetch(BASE_URL+"/basket/",{
+    fetch(BASE_URL+"/order/",{
         method:'POST',
         headers: {
             'Content-Type': 'application/json',

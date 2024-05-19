@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from .models import Flower, Basket, Category
+from .models import Flower, Order, Category
 from django.contrib.auth.models import User
 
 
@@ -12,9 +12,9 @@ class FlowerSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'img', 'price', 'stock']
 
 
-class BasketSerializer(serializers.ModelSerializer):
+class OrderSerializer(serializers.ModelSerializer):
     class Meta:
-        model = Basket
+        model = Order
         fields = ['id', 'user', 'flowers']
 
 
