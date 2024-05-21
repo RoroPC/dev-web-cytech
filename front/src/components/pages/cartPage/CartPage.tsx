@@ -52,6 +52,7 @@ function CartPage(){
                                 <p>Quantité : {itemToOrder.quantity}</p>
                                 <button onClick={()=>{
                                     deleteFromCart(itemToOrder);
+                                    setCart(cart.filter(item => item.item.id !== itemToOrder.item.id))
                                 }} className="cart__delete__btn">Supprimer</button>
                             </div>
                         ))}
