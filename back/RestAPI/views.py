@@ -1,14 +1,15 @@
 from django.contrib.auth import login, logout
 from django.contrib.auth.decorators import login_required
+from django.db.migrations import serializer
 from django.shortcuts import render
 from rest_framework import generics, status, permissions, authentication
 from rest_framework.authentication import SessionAuthentication
 
-from .Validation import custom_validation, validate_email, validate_password
+from .Validation import custom_validation, validate_email, validate_password, contact_validation
 from .models import Flower, Order, Category
 from django.contrib.auth.models import User
 from .serializers import FlowerSerializer, OrderSerializer, UserSerializer, CategorySerializer, UserRegisterSerializer, \
-    UserLoginSerializer
+    UserLoginSerializer, ContactSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from django.middleware.csrf import get_token
@@ -104,10 +105,12 @@ class UserDetailView(APIView):
 
     def get(self, request, format=None):
         data = {
+            "id": request.user.id,
             "username": request.user.username,
             "email": request.user.email,
             "first_name": request.user.first_name,
-            "last_name": request.user.last_name
+            "last_name": request.user.last_name,
+            "isAdmin": request.user.is_staff
         }
         return Response(data)
 
@@ -191,3 +194,14 @@ class CsrfTokenView(APIView):
 
     def get(self, request, *args, **kwargs):
         return Response({'csrfToken': get_token(request)})
+
+
+class ContactView(APIView):
+    def post(self, request, *args, **kwargs):
+        if contact_validation(request.data):
+            contactSerializer = ContactSerializer(data=request.data)
+            if contactSerializer.is_valid(raise_exception=True):
+                contactSerializer.create(request.data)
+                return Response(contactSerializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response("Error with the fields", status=status.HTTP_400_BAD_REQUEST)
