@@ -46,11 +46,11 @@ function Contact(){
             stringDate !== ""
         ){
             const postData = {
-                "first_name":firstName,
-                "last_name":lastName,
+                "firstName":firstName,
+                "lastName":lastName,
                 "email":email,
                 "gender":gender,
-                "birthday":birthday,
+                "birthdate":birthday,
                 "function":userFunction,
                 "subject":subject,
                 "content":content

@@ -43,18 +43,19 @@ def validate_password(data):
 
 def contact_validation(data):
     print(data)
-    first_name = data['first_name'].strip()
-    last_name = data['last_name'].strip()
+    first_name = data['firstName'].strip()
+    last_name = data['lastName'].strip()
     email = data['email'].strip()
     gender = data['gender'].strip()
-    birthday = data['birthday'].strip()
+    birthday = data['birthdate'].strip()
     function = data['function'].strip()
     subject = data['subject'].strip()
     content = data['content'].strip()
 
     if gender != "male" and gender != "female":
-        raise ValidationError('gender must be male or female.')
+        return False
     if not first_name or not last_name or not birthday or not function or not subject or not content or not email:
-        raise ValidationError('This field is required.')
+        return False
     if function != "teacher" and function != "student" and subject != "other":
-        raise ValidationError('This field should be teacher or student or other.')
+        return False
+    return True
