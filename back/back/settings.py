@@ -27,7 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
 # Application definition
 
 INSTALLED_APPS = [
@@ -38,10 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
-    'RestAPI'
+    'RestAPI',
+    'corsheaders',
+    "django_extensions",
+
 ]
 
+
+
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -49,6 +54,45 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+
+]
+
+SECURE_CROSS_ORIGIN_OPENER_POLICY = None
+
+CORS_ALLOW_CREDENTIALS = True
+
+SESSION_COOKIE_SAMESITE = 'None'
+CSRF_COOKIE_SAMESITE = 'None'  # If using CSRF protection
+
+CSRF_COOKIE_HTTPONLY = False  # Doit être False pour que JavaScript puisse accéder au cookie
+SESSION_COOKIE_HTTPONLY = False
+
+SECURE_PROXY_SSL_HEADER = None
+
+SESSION_COOKIE_SECURE = True
+CSRF_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+CORS_ALLOWED_ORIGINS = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://127.0.0.1:3000",
+    "https://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+    "https://127.0.0.1:5173",
+    "https://localhost:5173",
+]
+
+CSRF_TRUSTED_ORIGINS  = [
+    "http://127.0.0.1:3000",
+    "http://localhost:3000",
+    "https://127.0.0.1:3000",
+    "https://localhost:3000",
+    "http://127.0.0.1:5173",
+    "http://localhost:5173",
+    "https://127.0.0.1:5173",
+    "https://localhost:5173",
 ]
 
 ROOT_URLCONF = 'back.urls'
@@ -71,6 +115,8 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'back.wsgi.application'
 
+AUTHENTICATION_BACKENDS = ["django.contrib.auth.backends.ModelBackend"]
+
 
 # Database
 # https://docs.djangoproject.com/en/5.0/ref/settings/#databases
@@ -82,6 +128,14 @@ DATABASES = {
     }
 }
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.SessionAuthentication',
+    ),
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -123,3 +177,4 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+

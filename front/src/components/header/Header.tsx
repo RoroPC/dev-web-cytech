@@ -1,12 +1,25 @@
 import "./Header.scss";
 import logo from "../../assets/images/logo.png";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
+import {BASE_URL} from "../../services/api/api.ts";
+import  {useUser} from "../../contexts/user";
+import { IoCart } from "react-icons/io5";
+
 function Header(){
     const [isMobileMenuOpen, setMobileMenuOpen] = useState(false);
+    const { setUserData,userData } = useUser();
+
+    const [isConnectedState,setIsConnectedState] = useState((userData !== undefined && userData !== null));
+    useEffect(() => {
+        setIsConnectedState((userData !== undefined && userData !== null))
+    }, [userData]);
+
     const toggleMobileMenu = () => {
         setMobileMenuOpen(!isMobileMenuOpen);
     };
+
+    //TODO Régler le problème de déconnexion
     return(
         <header>
             <div id="logo">
@@ -18,7 +31,19 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li><a>Connexion</a></li>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link to="/login">Connexion</Link>
+                </li>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link
+                    to="/register">Inscription</Link>
+                </li>
+                <li className={`${isConnectedState ? 'non-connected' : 'connected'}`}><a
+                    onClick={() => {
+                        fetch(BASE_URL + "/logout", {method: "POST", credentials: "include"}).then(() => {
+                            setUserData(null);
+                            setIsConnectedState(false);
+                        });
+                    }}>Déconnexion</a></li>
+                <li className={"cart-link"}><Link to="/cart"><IoCart/></Link></li>
             </ul>
             <button className="no-display-on-desktop mobile-menu-button" onClick={toggleMobileMenu}>
                <span className="burger-icon">
@@ -33,7 +58,19 @@ function Header(){
                 <li><Link to="/rosiers">Rosiers</Link></li>
                 <li><Link to="/plantes-a-massif">Plantes à massif</Link></li>
                 <li><Link to="/contact">Contact</Link></li>
-                <li><a>Connexion</a></li>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link to="/login">Connexion</Link>
+                </li>
+                <li className={`${isConnectedState ? 'connected' : 'non-connected'}`}><Link
+                    to="/register">Inscription</Link>
+                </li>
+                <li className={`${isConnectedState ? 'non-connected' : 'connected'}`}><a
+                    onClick={() => {
+                        fetch(BASE_URL + "/logout", {method: "POST", credentials: "include"}).then(() => {
+                            setIsConnectedState(false);
+                            setUserData(null);
+                        });
+                    }}>Déconnexion</a></li>
+                <li><Link to="/cart">Panier</Link></li>
 
             </ul>
         </header>

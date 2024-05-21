@@ -1,5 +1,17 @@
+import axios from 'axios';
+
 export const BASE_URL = "https://127.0.0.1:8000/api";
 export const BASE_URL_WITHOUT_API = "https://127.0.0.1:8000";
+
+
+axios.defaults.xsrfCookieName = 'csrftoken';
+axios.defaults.xsrfHeaderName = 'X-CSRFToken';
+axios.defaults.withCredentials = true;
+
+export const CLIENT = axios.create({
+    baseURL: BASE_URL_WITHOUT_API
+});
+
 
 /**
  * Fait une reqête vers l'api avec les credentials
