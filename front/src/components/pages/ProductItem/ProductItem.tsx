@@ -7,11 +7,32 @@ import {useState} from "react";
 function ProductItem({refer, title, img, price, stock}:ProductItemType) {
     const [seeStock, setSeeStock] = useState(false);
     const [qtOrder, setqtOrder] = useState(0);
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentImg, setCurrentImg] = useState('');
+
+    const openPopup = (imgSrc) => {
+        setCurrentImg(imgSrc);
+        setIsOpen(true);
+    };
+
+    const closePopup = () => {
+        setIsOpen(false);
+    };
     return (
         <div className="product-item" id={refer}>
             <div className="product-item__image">
-                <img src={img} alt="product"/>
+                <img src={img} alt="product" onClick={() => openPopup(img)} />
             </div>
+
+            {isOpen && (
+                <div className="popup" onClick={closePopup}>
+                    <div className="popup__content" onClick={(e) => e.stopPropagation()}>
+                        <img src={currentImg} alt="product enlarged" />
+                        <button className="popup__close" onClick={closePopup}>Close</button>
+                    </div>
+                </div>
+            )}
             <div className="product-item__info__title">{title}</div>
             <div className="product-item__info__price">{price} $</div>
             {seeStock && (
