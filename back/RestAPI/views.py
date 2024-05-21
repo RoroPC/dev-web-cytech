@@ -198,8 +198,10 @@ class CsrfTokenView(APIView):
 
 class ContactView(APIView):
     def post(self, request, *args, **kwargs):
-        assert contact_validation(request.data)
-        contactSerializer = ContactSerializer(data=request.data)
-        if contactSerializer.is_valid(raise_exception=True):
-            contactSerializer.create(request.data)
-            return Response(contactSerializer.data, status=status.HTTP_201_CREATED)
+        if contact_validation(request.data):
+            contactSerializer = ContactSerializer(data=request.data)
+            if contactSerializer.is_valid(raise_exception=True):
+                contactSerializer.create(request.data)
+                return Response(contactSerializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response("Error with the fields", status=status.HTTP_400_BAD_REQUEST)

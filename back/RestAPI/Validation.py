@@ -56,6 +56,7 @@ def contact_validation(data):
         return False
     if not first_name or not last_name or not birthday or not function or not subject or not content or not email:
         return False
-    if function != "teacher" and function != "student" and subject != "other":
+    if function != "teacher" and function != "student" and function != "other":
+        print(function)
         return False
     return True

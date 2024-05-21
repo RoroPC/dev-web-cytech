@@ -18,6 +18,7 @@ function Contact(){
     const [subject, setSubject] = useState("");
     const [content, setContent] = useState("");
 
+    const [showErrorMessage, setShowErrorMessage] = useState(false);
     const [dateErr, setDateErr] = useState(false);
     const [csrfToken, setCsrfToken] = useState('');
 
@@ -45,6 +46,7 @@ function Contact(){
             content !== "" &&
             stringDate !== ""
         ){
+            setShowErrorMessage( false);
             const postData = {
                 "firstName":firstName,
                 "lastName":lastName,
@@ -72,6 +74,8 @@ function Contact(){
                     }
                 }).catch(error => console.error('Error:', error));
 
+        }else{
+            setShowErrorMessage(true);
         }
     }
 
@@ -134,9 +138,11 @@ function Contact(){
                     </div>
                     <div className={"contact__input"}>
                         <label htmlFor="content">Contenu</label>
-                        <textarea name={"content"}  placeholder={"Tapez ici votre mail"} onChange={(e) => setContent(e.target.value)}/>
+                        <textarea name={"content"}  placeholder={"Tapez ici votre mail"} onChange={(e) => setContent(e.target.value)} required/>
                     </div>
                     <input name={"contact-date"} type={"date"} value={stringDate} hidden readOnly required/>
+                    {showErrorMessage ??
+                    <p className="text__error">Les champs remplis ne sont pas valides !</p>}
                     <input onClick={formatErrorHandler} className={"contact__submit__btn"} name={"submit"} type={"submit"} value={"Envoyer"}/>
                 </form>
             </div>
