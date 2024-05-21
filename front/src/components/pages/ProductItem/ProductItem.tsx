@@ -40,7 +40,7 @@ function ProductItem({id, name, img, price, stock}:ProductItemType) {
                 <div className="popup" onClick={closePopup}>
                     <div className="popup__content" onClick={(e) => e.stopPropagation()}>
                         <img src={currentImg} alt="product enlarged" />
-                        <button className="popup__close" onClick={closePopup}>Close</button>
+                        <button className="popup__close" onClick={closePopup}>Fermer</button>
                     </div>
                 </div>
             )}
