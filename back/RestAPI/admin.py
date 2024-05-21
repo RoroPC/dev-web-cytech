@@ -1,5 +1,5 @@
 from django.contrib import admin
-from RestAPI.models import Flower, Order, Category
+from RestAPI.models import Flower, Order, Category, Contact
 
 
 # Register your models here.
@@ -21,7 +21,11 @@ class OrderAdmin(admin.ModelAdmin):
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
 
+class ContactAdmin(admin.ModelAdmin):
+    list_display = ('id','firstName','lastName','email','birthdate','gender','function','subject','content')
+
 
 admin.site.register(Flower, FlowerAdmin)
 admin.site.register(Order, OrderAdmin)
 admin.site.register(Category, CategoryAdmin)
+admin.site.register(Contact, ContactAdmin)

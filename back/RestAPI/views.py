@@ -198,7 +198,6 @@ class CsrfTokenView(APIView):
 
 class ContactView(APIView):
     def post(self, request, *args, **kwargs):
-        assert validate_email(request.data['email'])
         assert contact_validation(request.data)
         contactSerializer = ContactSerializer(data=request.data)
         if contactSerializer.is_valid(raise_exception=True):
