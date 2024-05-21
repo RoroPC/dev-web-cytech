@@ -67,11 +67,11 @@ function Contact(){
                         <div className={"contact__radio__button"}>
                             <div>
                                 <label htmlFor="gender">Homme</label>
-                                <input name={"gender"} type={"radio"} onChange={(e) => setGender(e.target.value)} required/>
+                                <input value={"male"} name={"gender"} type={"radio"} onChange={(e) => setGender(e.target.value)} required/>
                             </div>
                             <div>
                                 <label htmlFor="gender">Femme</label>
-                                <input name={"gender"} type={"radio"} onChange={(e) => setGender(e.target.value)} required/>
+                                <input value={"female"} name={"gender"} type={"radio"} onChange={(e) => setGender(e.target.value)} required/>
                             </div>
                         </div>
                     </div>

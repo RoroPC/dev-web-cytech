@@ -30,3 +30,15 @@ class Order(models.Model):
 
     def __str__(self):
         return f"Basket of {self.user.username}"
+
+
+class Contact(models.Model):
+    id = models.AutoField(primary_key=True)
+    email = models.EmailField()
+    lastName = models.CharField(max_length=100)
+    firstName = models.CharField(max_length=100)
+    gender = models.CharField(max_length=10)
+    birthdate = models.DateField()
+    function = models.CharField(max_length=100)
+    subject = models.CharField(max_length=100)
+    content = models.TextField()

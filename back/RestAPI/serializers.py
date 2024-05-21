@@ -2,7 +2,7 @@ from django.contrib.auth import authenticate
 from rest_framework import serializers
 from rest_framework.exceptions import ValidationError
 
-from .models import Flower, Order, Category
+from .models import Flower, Order, Category, Contact
 from django.contrib.auth.models import User
 
 
@@ -28,6 +28,17 @@ class CategorySerializer(serializers.ModelSerializer):
     class Meta:
         model = Category
         fields = ['id', 'name']
+
+
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = '__all__'
+
+    def create(self, validated_data):
+        contact = Contact.objects.create(**validated_data)
+        contact.save()
+        return contact
 
 
 class UserRegisterSerializer(serializers.ModelSerializer):

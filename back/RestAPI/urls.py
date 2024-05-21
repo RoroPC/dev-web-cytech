@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.urls import path
 from .views import FlowerListView, FlowerListViewByCategory, OrderDetailView, UserDetailView, FlowerDetailView, \
-    UserRegister, UserLogin, UserLogout, CsrfTokenView
+    UserRegister, UserLogin, UserLogout, CsrfTokenView, ContactView
 
 urlpatterns = [
     path('flowers/', FlowerListView.as_view(), name='flowers'),
@@ -13,5 +13,6 @@ urlpatterns = [
     path('login', UserLogin.as_view(), name='login'),
     path('logout', UserLogout.as_view(), name='logout'),
     path('csrf/', CsrfTokenView.as_view(), name='csrf'),
+    path('contact/', ContactView.as_view(), name='contact'),
 
 ]
