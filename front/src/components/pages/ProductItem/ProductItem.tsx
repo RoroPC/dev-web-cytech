@@ -2,14 +2,16 @@
 import "./ProductItem.scss";
 import ProductItemType from "./ProductItemType.ts"
 import PropTypes from "prop-types";
-import {useContext, useState} from "react";
+import {useContext, useEffect, useState} from "react";
 import {CartContext} from "../../../contexts/cart";
 import {ProductItemOrder} from "../../../contexts/cart/ProductItemOrder.ts";
+import {useUser} from "../../../contexts/user";
 
 function ProductItem({id, name, img, price, stock}:ProductItemType) {
     const [seeStock, setSeeStock] = useState(false);
     const [qtOrder, setqtOrder] = useState(0);
     const [stockState,] = useState(stock)
+    const { userData } = useUser();
 
     const cartContext = useContext(CartContext);
     let addToCart = (product:ProductItemOrder)=>{
@@ -30,6 +32,15 @@ function ProductItem({id, name, img, price, stock}:ProductItemType) {
     const closePopup = () => {
         setIsOpen(false);
     };
+
+    const [isAdmin,setIsAdmin ] = useState(false);
+    useEffect(() => {
+        if (userData?.isAdmin){
+            setIsAdmin(userData.isAdmin)
+        }
+        console.log("isAdmin"+isAdmin)
+        console.log(userData?.isAdmin)
+    }, [userData]);
 
     return (
         <div className="product-item" id={id}>
@@ -69,8 +80,10 @@ function ProductItem({id, name, img, price, stock}:ProductItemType) {
                 addToCart(itemOrder)
             }} disabled={qtOrder == 0} className="product-item__info__btn product-item__info__order">Ajouter au panier
             </button>
-            <button onClick={() => setSeeStock(!seeStock)} className="product-item__info__btn">Stock</button>
-            {seeStock && (
+            {isAdmin &&
+                <button onClick={() => setSeeStock(!seeStock)} className="product-item__info__btn">Stock</button>
+            }
+            {(seeStock && isAdmin) && (
                 <div className="product-item__info__stock--visible">{stockState}</div>
             )}
         </div>

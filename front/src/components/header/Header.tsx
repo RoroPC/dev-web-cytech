@@ -2,7 +2,7 @@ import "./Header.scss";
 import logo from "../../assets/images/logo.png";
 import {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
-import {BASE_URL} from "../../services/api/api.ts";
+import {BASE_URL, BASE_URL_WITHOUT_API} from "../../services/api/api.ts";
 import  {useUser} from "../../contexts/user";
 import { IoCart } from "react-icons/io5";
 
@@ -13,6 +13,15 @@ function Header(){
     const [isConnectedState,setIsConnectedState] = useState((userData !== undefined && userData !== null));
     useEffect(() => {
         setIsConnectedState((userData !== undefined && userData !== null))
+    }, [userData]);
+
+    const [isAdmin,setIsAdmin ] = useState(false);
+    useEffect(() => {
+        if (userData?.isAdmin){
+            setIsAdmin(userData.isAdmin)
+        }
+        console.log("isAdmin"+isAdmin)
+        console.log(userData?.isAdmin)
     }, [userData]);
 
     const toggleMobileMenu = () => {
@@ -44,6 +53,7 @@ function Header(){
                         });
                     }}>Déconnexion</a></li>
                 <li className={"cart-link"}><Link to="/cart"><IoCart/></Link></li>
+                {isAdmin && <li ><a href={BASE_URL_WITHOUT_API+"/admin/"}></a>Panel Administrateur</li>}
             </ul>
             <button className="no-display-on-desktop mobile-menu-button" onClick={toggleMobileMenu}>
                <span className="burger-icon">
@@ -71,6 +81,8 @@ function Header(){
                         });
                     }}>Déconnexion</a></li>
                 <li><Link to="/cart">Panier</Link></li>
+                {isAdmin && <li ><a href={BASE_URL_WITHOUT_API+"/admin/"}>Panel Administrateur</a></li>}
+
 
             </ul>
         </header>
