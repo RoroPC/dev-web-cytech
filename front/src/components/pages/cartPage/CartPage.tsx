@@ -13,7 +13,7 @@ function CartPage(){
     }
 
     const [cart, setCart] = useState(cartContext.cart)
-    const {deleteFromCart} = cartContext
+    const {deleteFromCart, resetCart} = cartContext
 
     const {userData } = useUser();
 
@@ -35,6 +35,10 @@ function CartPage(){
 
     }, []);
 
+    useEffect(() => {
+        resetCart()
+    }, []);
+
     const [hasOrdered, setHasOrdered] = useState(false);
     return(
         <main className="cart">
@@ -52,6 +56,7 @@ function CartPage(){
                                 <p>Quantité : {itemToOrder.quantity}</p>
                                 <button onClick={()=>{
                                     deleteFromCart(itemToOrder);
+                                    setCart(cart.filter(item => item.item.id !== itemToOrder.item.id))
                                 }} className="cart__delete__btn">Supprimer</button>
                             </div>
                         ))}

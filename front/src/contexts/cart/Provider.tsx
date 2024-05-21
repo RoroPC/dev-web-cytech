@@ -1,10 +1,15 @@
 import {CartContext, CartProviderProps} from "./index.ts";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {ProductItemOrder} from "./ProductItemOrder.ts";
+import Cookies from "js-cookie";
 
 
 export const CartProvider: React.FC<CartProviderProps> = ({children})=>{
     const [cart, setCart] = useState<ProductItemOrder[]>();
+
+    useEffect(() => {
+        resetCart();
+    }, []);
 
     const addToCart = (product:ProductItemOrder) => {
         const newCart = [];
@@ -17,16 +22,23 @@ export const CartProvider: React.FC<CartProviderProps> = ({children})=>{
         });
         newCart.push(product);
         setCart(newCart);
+        Cookies.set("cart",JSON.stringify(newCart));
     }
-
+    const resetCart = () => {
+        const storedCart = Cookies.get("cart");
+        if (storedCart){
+            setCart(JSON.parse(storedCart));
+        }
+    }
     const deleteFromCart = (product:ProductItemOrder)=> {
         if (cart == undefined)
             return;
         const newCart = cart.filter(item => item.item.id !== product.item.id);
         setCart(newCart)
+        Cookies.set("cart", JSON.stringify(newCart));
     }
     return (
-        <CartContext.Provider value={{ cart, addToCart, deleteFromCart }}>
+        <CartContext.Provider value={{ cart, addToCart, deleteFromCart, resetCart }}>
             {children}
         </CartContext.Provider>
     );
