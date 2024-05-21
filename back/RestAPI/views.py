@@ -5,9 +5,9 @@ from rest_framework import generics, status, permissions, authentication
 from rest_framework.authentication import SessionAuthentication
 
 from .Validation import custom_validation, validate_email, validate_password
-from .models import Flower, Basket, Category
+from .models import Flower, Order, Category
 from django.contrib.auth.models import User
-from .serializers import FlowerSerializer, BasketSerializer, UserSerializer, CategorySerializer, UserRegisterSerializer, \
+from .serializers import FlowerSerializer, OrderSerializer, UserSerializer, CategorySerializer, UserRegisterSerializer, \
     UserLoginSerializer
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -111,7 +111,8 @@ class UserDetailView(APIView):
         }
         return Response(data)
 
-class BasketDetailView(APIView):
+
+class OrderDetailView(APIView):
     """
         Get current user basket
     """
@@ -120,8 +121,8 @@ class BasketDetailView(APIView):
 
     def get(self, request, format=None):
         current_user = request.user.id
-        queryset = Basket.objects.filter(user=current_user)
-        serializer_class = BasketSerializer(queryset, many=True)
+        queryset = Order.objects.filter(user=current_user)
+        serializer_class = OrderSerializer(queryset, many=True)
         return Response(serializer_class.data)
 
     def post(self, request, format=None):
@@ -130,10 +131,10 @@ class BasketDetailView(APIView):
             'flowers')
 
         try:
-            basket = Basket.objects.get(user=user)
+            basket = Order.objects.get(user=user)
             basket.flowers.clear()
-        except Basket.DoesNotExist:
-            basket = Basket.objects.create(user=user)
+        except Order.DoesNotExist:
+            basket = Order.objects.create(user=user)
 
         for flower_id in flowers_data:
             try:
@@ -143,7 +144,7 @@ class BasketDetailView(APIView):
                 return Response({"error": f"Flower with id {flower_id} does not exist"},
                                 status=status.HTTP_400_BAD_REQUEST)
 
-        serializer = BasketSerializer(basket)
+        serializer = OrderSerializer(basket)
         return Response(serializer.data, status=status.HTTP_201_CREATED)
 
 
@@ -154,7 +155,7 @@ class UserRegister(APIView):
         clean_data = custom_validation(request.data)
         serializer = UserRegisterSerializer(data=clean_data)
         if serializer.is_valid(raise_exception=True):
-            #serializer.create(clean_data)
+            # serializer.create(clean_data)
             user = serializer.create(clean_data)
             if user:
                 return Response(serializer.data, status=status.HTTP_201_CREATED)

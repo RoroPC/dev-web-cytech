@@ -1,5 +1,5 @@
 from django.contrib import admin
-from RestAPI.models import Flower, Basket, Category
+from RestAPI.models import Flower, Order, Category
 
 
 # Register your models here.
@@ -11,7 +11,7 @@ class FlowerAdmin(admin.ModelAdmin):
         return obj.Category.name if obj.category else '-'
 
 
-class BasketAdmin(admin.ModelAdmin):
+class OrderAdmin(admin.ModelAdmin):
     list_display = ('id', 'user', 'display_flowers')
 
     def display_flowers(self, obj):
@@ -23,5 +23,5 @@ class CategoryAdmin(admin.ModelAdmin):
 
 
 admin.site.register(Flower, FlowerAdmin)
-admin.site.register(Basket, BasketAdmin)
+admin.site.register(Order, OrderAdmin)
 admin.site.register(Category, CategoryAdmin)

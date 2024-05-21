@@ -19,11 +19,31 @@ function ProductItem({id, name, img, price, stock}:ProductItemType) {
         addToCart = cartContext.addToCart;
     }
 
+    const [isOpen, setIsOpen] = useState(false);
+    const [currentImg, setCurrentImg] = useState('');
+
+    const openPopup = (imgSrc: string) => {
+        setCurrentImg(imgSrc);
+        setIsOpen(true);
+    };
+
+    const closePopup = () => {
+        setIsOpen(false);
+    };
+
     return (
         <div className="product-item" id={id}>
             <div className="product-item__image">
-                <img src={img} alt="product"/>
+                <img src={img} alt="product" onClick={() => openPopup(img)} />
             </div>
+            {isOpen && (
+                <div className="popup" onClick={closePopup}>
+                    <div className="popup__content" onClick={(e) => e.stopPropagation()}>
+                        <img src={currentImg} alt="product enlarged" />
+                        <button className="popup__close" onClick={closePopup}>Fermer</button>
+                    </div>
+                </div>
+            )}
             <div className="product-item__info__title">{name}</div>
             <div className="product-item__info__price">{price} $</div>
 
