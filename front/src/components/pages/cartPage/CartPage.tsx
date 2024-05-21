@@ -13,7 +13,7 @@ function CartPage(){
     }
 
     const [cart, setCart] = useState(cartContext.cart)
-    const {deleteFromCart} = cartContext
+    const {deleteFromCart, resetCart} = cartContext
 
     const {userData } = useUser();
 
@@ -33,6 +33,10 @@ function CartPage(){
                 setCsrfToken(data.csrfToken)
             });
 
+    }, []);
+
+    useEffect(() => {
+        resetCart()
     }, []);
 
     const [hasOrdered, setHasOrdered] = useState(false);

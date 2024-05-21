@@ -5,6 +5,7 @@ export interface CartContextType {
     cart: ProductItemOrder[]|undefined;
     addToCart: (product: ProductItemOrder) => void;
     deleteFromCart: (product: ProductItemOrder) => void;
+    resetCart:() => void;
 }
 
 export const CartContext = createContext<CartContextType|undefined>(undefined)
