@@ -11,7 +11,7 @@ function ProductItem({refer, title, img, price, stock}:ProductItemType) {
     const [isOpen, setIsOpen] = useState(false);
     const [currentImg, setCurrentImg] = useState('');
 
-    const openPopup = (imgSrc) => {
+    const openPopup = (imgSrc: string) => {
         setCurrentImg(imgSrc);
         setIsOpen(true);
     };
