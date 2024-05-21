@@ -1,6 +1,7 @@
 import "./Contact.scss"
 import illustration from '../../../assets/images/contact_img.svg';
-import {useState} from "react";
+import {useEffect, useState} from "react";
+import {BASE_URL} from "../../../services/api/api.ts";
 function Contact(){
     const presentDay = new Date();
     const month = presentDay.getMonth() < 10 ? "0"+presentDay.getMonth() : presentDay.getMonth().toString();
@@ -18,7 +19,19 @@ function Contact(){
     const [content, setContent] = useState("");
 
     const [dateErr, setDateErr] = useState(false);
+    const [csrfToken, setCsrfToken] = useState('');
 
+    useEffect(() => {
+        fetch(BASE_URL + "/csrf/", {
+            method: "GET",
+            credentials: "include"
+        })
+            .then(response => response.json())
+            .then(data => {
+                setCsrfToken(data.csrfToken)
+            });
+
+    }, []);
     const handleSubmit = (event: { preventDefault: () => void; }) => {
         event.preventDefault();
         if (
@@ -32,7 +45,33 @@ function Contact(){
             content !== "" &&
             stringDate !== ""
         ){
-            //Envoyer un mail
+            const postData = {
+                "first_name":firstName,
+                "last_name":lastName,
+                "email":email,
+                "gender":gender,
+                "birthday":birthday,
+                "function":userFunction,
+                "subject":subject,
+                "content":content
+            }
+            fetch(BASE_URL + "/contact/", {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(postData)
+            })
+                .then(response => {
+                    if (response.ok){
+                        console.log('Form submitted successfully');
+                    }else{
+                        console.log('Error submitting form');
+                    }
+                }).catch(error => console.error('Error:', error));
+
         }
     }
 
