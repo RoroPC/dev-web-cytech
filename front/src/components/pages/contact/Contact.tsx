@@ -23,6 +23,7 @@ function Contact(){
     const [dateErr, setDateErr] = useState(false);
     const [csrfToken, setCsrfToken] = useState('');
 
+    const [isSend, setIsSend] = useState(false);
     const { userData } = useUser();
 
 
@@ -86,6 +87,7 @@ function Contact(){
             })
                 .then(response => {
                     if (response.ok){
+                        setIsSend(true);
                         console.log('Form submitted successfully');
                     }else{
                         console.log('Error submitting form');
@@ -163,6 +165,8 @@ function Contact(){
                     {showErrorMessage ??
                     <p className="text__error">Les champs remplis ne sont pas valides !</p>}
                     <input onClick={formatErrorHandler} className={"contact__submit__btn"} name={"submit"} type={"submit"} value={"Envoyer"}/>
+                    {isSend && <p style={{color: 'green'}}>Votre message à bien été envoyé !</p>}
+
                 </form>
             </div>
         </main>

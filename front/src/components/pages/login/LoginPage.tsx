@@ -11,6 +11,7 @@ function LoginPage(){
     const [email,setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState("");
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const { setUserData } = useUser();
 
@@ -36,6 +37,7 @@ function LoginPage(){
                         if (response.status != 201 && response.status != 200){
                             setErrorMessage("Email ou mot de passe incorrecte !")
                         }else{
+                            setIsLoggedIn(true);
                             getMe().then((user) => {
                                 setUserData(user);
                             });
@@ -57,7 +59,8 @@ function LoginPage(){
                     }
                 }} name="password"/>
                 {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
-                <button type="submit" >Connexion</button>
+                {isLoggedIn && <p style={{color: 'green'}}>Vous avez bien été connecté !</p>}
+                <button type="submit">Connexion</button>
             </form>
         </main>
     )
