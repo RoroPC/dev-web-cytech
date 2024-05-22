@@ -30,13 +30,13 @@ Une fois que les dépendances sont installées :
 
 Actualiser la base de donnés:
 ```
-python manage.py migrate
+python3 manage.py migrate
 ```
 
 Pour lancer le server Rest en HTTPS:
 
 ```
-python manage.py runserver_plus --cert-file cert.pem --key-file key.pem
+python3 manage.py runserver_plus --cert-file cert.pem --key-file key.pem
 ```
 
 
