@@ -28,7 +28,6 @@ function Header(){
         setMobileMenuOpen(!isMobileMenuOpen);
     };
 
-    //TODO Régler le problème de déconnexion
     return(
         <header>
             <div id="logo">
@@ -53,7 +52,7 @@ function Header(){
                         });
                     }}>Déconnexion</a></li>
                 <li className={"cart-link"}><Link to="/cart"><IoCart/></Link></li>
-                {isAdmin && <li ><a href={BASE_URL_WITHOUT_API+"/admin/"}></a>Panel Administrateur</li>}
+                {isAdmin && <li ><a href={BASE_URL_WITHOUT_API+"/admin/"} target="_blank">Panel Administrateur</a></li>}
             </ul>
             <button className="no-display-on-desktop mobile-menu-button" onClick={toggleMobileMenu}>
                <span className="burger-icon">
@@ -81,7 +80,7 @@ function Header(){
                         });
                     }}>Déconnexion</a></li>
                 <li><Link to="/cart">Panier</Link></li>
-                {isAdmin && <li ><a href={BASE_URL_WITHOUT_API+"/admin/"}>Panel Administrateur</a></li>}
+                {isAdmin && <li ><a href={BASE_URL_WITHOUT_API+"/admin/"} target="_blank">Panel Administrateur</a></li>}
 
 
             </ul>

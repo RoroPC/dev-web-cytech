@@ -2,6 +2,7 @@ import "./Contact.scss"
 import illustration from '../../../assets/images/contact_img.svg';
 import {useEffect, useState} from "react";
 import {BASE_URL} from "../../../services/api/api.ts";
+import {useUser} from "../../../contexts/user";
 function Contact(){
     const presentDay = new Date();
     const month = presentDay.getMonth() < 10 ? "0"+presentDay.getMonth() : presentDay.getMonth().toString();
@@ -21,6 +22,23 @@ function Contact(){
     const [showErrorMessage, setShowErrorMessage] = useState(false);
     const [dateErr, setDateErr] = useState(false);
     const [csrfToken, setCsrfToken] = useState('');
+
+    const { userData } = useUser();
+
+
+    useEffect(() => {
+        if(userData){
+            if (userData.first_name){
+                setFirstName(userData.first_name)
+            }
+            if (userData.last_name){
+                setLastName(userData.last_name)
+            }
+            if (userData.email){
+                setEmail(userData.email)
+            }
+        }
+    }, [userData]);
 
     useEffect(() => {
         fetch(BASE_URL + "/csrf/", {
@@ -95,15 +113,16 @@ function Contact(){
                 <form onSubmit={handleSubmit} name={"contact-form"} method={"POST"}>
                     <div className={"contact__input"}>
                         <label htmlFor="first-name">Prénom</label>
-                        <input name={"first-name"} placeholder={"Entrez votre prénom"} onChange={(e) => setFirstName(e.target.value)} required/>
+                        <input name={"first-name"} placeholder={"Entrez votre prénom"} onChange={(e) => setFirstName(e.target.value)} value={firstName} required/>
                     </div>
                     <div className={"contact__input"}>
                         <label htmlFor="last-name">Nom</label>
-                        <input name={"last-name"} placeholder={"Entrez votre nom"} onChange={(e) => setLastName(e.target.value)} required/>
+                        <input name={"last-name"} placeholder={"Entrez votre nom"} onChange={(e) => setLastName(e.target.value)} value={lastName} required/>
                     </div>
                     <div className={"contact__input"}>
                         <label htmlFor="mail">Email</label>
-                        <input name={"mail"} type={"email"} placeholder={"monmail@monsite.org"} onChange={(e) => setEmail(e.target.value)} required/>
+
+                        <input name={"mail"} type={"email"} placeholder={"monmail@monsite.org"} onChange={(e) => setEmail(e.target.value)} value={email} required/>
                     </div>
                     <div className={"contact__input"}>
                         <label htmlFor="gender">Genre</label>
