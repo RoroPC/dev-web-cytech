@@ -58,5 +58,5 @@ Mot de passe : **testtest**
 Si la connexion/inscription ne fonctionne pas, et que dans la console du navigateur vous avez une erreur du type : NET::ERR_CERT_AUTHORITY_INVALID  
 Pour chrome :  
 - Aller ici **chrome://flags/#allow-insecure-localhost**
-- Metter ce paramètre **Allow invalid certificates for resources loaded from localhost** a **enabled**
+- Mettre ce paramètre **Allow invalid certificates for resources loaded from localhost** a **enabled**
 
